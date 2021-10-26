@@ -55,7 +55,7 @@
                 />
 
               </v-container>
-              <v-btn :disabled="!valid" @click="login" id="btn">Login</v-btn>
+              <v-btn :disabled="!valid" @click="login()" id="btn">Login</v-btn>
             </v-form>
           </v-card-text>
         </v-card>
@@ -66,7 +66,6 @@
 
 <script>
 
-  import router from '../router';
   import {APIService} from '../http/APIService';
   const apiService = new APIService();
 

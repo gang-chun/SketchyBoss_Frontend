@@ -1,11 +1,11 @@
 import axios from 'axios';
-const API_URL = 'http://127.0.0.1:8000/'; /* 'http://localhost:8000' http://127.0.0.1:8000/ or  'https://movies-groyce.pythonanywhere.com/'*/
+const API_URL = 'https://sketchyboss.herokuapp.com'; /* 'http://localhost:8000' http://127.0.0.1:8000/ or  'https://movies-groyce.pythonanywhere.com/'*/
 
 export class APIService {
   constructor() {
 
   }
-
+ // Placeholders, do not delete!
   getMovie(param_pk) {
     const url = `${API_URL}/api/movies/${param_pk}`;
     let jwtToken = localStorage.getItem('token');
@@ -14,13 +14,12 @@ export class APIService {
     return axios.get(url, {headers: {Authorization: `jwt ${jwtToken}`}});
   }
 
-  getMovieList() {
-    const url = `${API_URL}/api/movies/`;
+  getReportList() {
+    const url = `${API_URL}/api/reports/`;
     let jwtToken = localStorage.getItem('token');
     console.log(":::jwtToken:::::"+jwtToken);
     const headers = {Authorization: `jwt ${jwtToken}`};
     return axios.get(url, {headers: headers});
-
   }
 
   addNewMovie(movie){

@@ -12,10 +12,7 @@
 
       <v-navigation-drawer floating permanent>
         <v-list dense rounded>
-          <v-list-item
-            v-for="item in items"
-            :key="item.title"
-            @click="showContent(item.title)">
+          <v-list-item v-for="item in items" :key="item.title" @click="showContent(item.title)">
             <v-list-item-icon>
               <v-icon style="color: black">{{ item.icon }}</v-icon>
             </v-list-item-icon>
@@ -49,7 +46,6 @@
 
 <script>
 
-  import router from '../router'
   import Search from '../components/Search'
   import Reports from '../components/Reports'
   import Settings from '../components/Settings'

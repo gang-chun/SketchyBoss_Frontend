@@ -1,9 +1,9 @@
 <template>
   <v-app id="page">
     <v-app-bar app color="black">
-      <span><v-img
-                      :src="require('@/assets/images/SBLogoBlack.jpg')" height="36px" width="36px" style="border: white solid 1px">
-                    </v-img></span>
+      <span>
+        <v-img :src="require('@/assets/images/SBLogoBlack.jpg')" height="36px" width="36px" style="border: white solid 1px"></v-img>
+      </span>
       <v-toolbar-title><span style="color: white; padding-left: 18px;">SKETCHY</span><span style="font-weight: bold; color: white; padding-left: 2px">BOSS</span></v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="hidden-xs-only">
