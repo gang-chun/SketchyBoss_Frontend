@@ -49,6 +49,7 @@
                   :rules="rules.password"
                   maxlength="20"
                   required
+                  @keyup.enter="login()"
                   prepend-icon="mdi-lock"
                   :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                   @click:append="showPassword = ! showPassword"
