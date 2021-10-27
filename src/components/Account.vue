@@ -27,7 +27,7 @@
         <v-spacer></v-spacer>
       <v-col cols="12" md="9">
           <v-card elevation="24" id="contentCard">
-            <div v-if="contentField == 'My Reports'">
+            <div v-if="contentField == 'Reports'">
               <reports></reports>
             </div>
             <div v-else-if="contentField == 'Settings'">
@@ -65,7 +65,7 @@
         currentPage: 'Search',
         items: [
           { title: 'Search', icon: 'mdi-account-search', url: '/account/search'},
-          { title: 'My Reports', icon: 'mdi-forum' },
+          { title: 'Reports', icon: 'mdi-forum' },
           { title: 'Settings', icon: 'mdi-tools' },
         ],
       }

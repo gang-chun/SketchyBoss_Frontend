@@ -2,16 +2,35 @@
 <template >
   <v-app class="content">
     <h2>{{ msg }}</h2>
-    <v-row class="d-flex flex-column">
-      <v-col cols="12" class="d-flex flex-column mb-6"
-        v-for="(report,index) in reports"
-        :key="index">
-          <v-card>
-            <v-card-title style="font-weight: bolder">{{report.report_title}}</v-card-title>
-            <v-card-subtitle>{{report.report_date_created}} | actor | company </v-card-subtitle>
-          </v-card>
-      </v-col>
-    </v-row>
+
+    <v-expansion-panels>
+    <v-expansion-panel
+      v-for="(report,index) in reports"
+      :key="index"
+    >
+      <v-expansion-panel-header>
+        {{report.report_title}}
+        {{report.report_date_created}} | actor | company
+      </v-expansion-panel-header>
+      <v-expansion-panel-content>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        <br>
+        <div class="btns">
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="normal" v-bind="attrs" v-on="on"> ACTIONS </v-btn>
+            </template>
+          <v-list>
+            <v-list-item v-for="(item, index) in actions" :key="index" link>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+        </div>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+  </v-expansion-panels>
+
   </v-app>
   </template>
 
@@ -22,6 +41,17 @@ export default {
   data() {
     return {
       msg: 'This is the reports component',
+      actions: [
+        {
+          'title': 'Unpublish'
+        },
+        {
+          'title': 'Modify'
+        },
+        {
+          'title': 'Delete'
+        }
+      ],
       reports: [
         {
           "report_title": 'First report',
@@ -66,5 +96,10 @@ export default {
   justify-content: center;
   align-content: center;
   padding: 40px;
+}
+
+.btns {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>
