@@ -21,7 +21,7 @@
               <v-btn color="normal" v-bind="attrs" v-on="on"> ACTIONS </v-btn>
             </template>
           <v-list>
-            <v-list-item v-for="(item, index) in actions" :key="index" link>
+            <v-list-item v-for="(item, index) in actions" :key="index" @click="methods.btn_action(item.title)">
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item>
           </v-list>
@@ -84,6 +84,14 @@ export default {
           "donor": true
         },
       ],
+      methods: {
+        btn_action(action) {
+          if(action=='Delete'){
+            alert("Are you sure you want to delete this report permanently?")
+          }
+
+        }
+      }
     }
   },
 }
