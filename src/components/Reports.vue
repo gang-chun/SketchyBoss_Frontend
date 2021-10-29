@@ -1,13 +1,9 @@
 
-<template >
+<template>
   <v-app class="content">
-    <h2>{{ msg }}</h2>
 
     <v-expansion-panels>
-    <v-expansion-panel
-      v-for="(report,index) in reports"
-      :key="index"
-    >
+    <v-expansion-panel v-for="(report,index) in reports" :key="index">
       <v-expansion-panel-header>
         {{report.report_title}}
         {{report.report_date_created}} | actor | company
@@ -16,14 +12,18 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         <br>
         <div class="btns">
-          <v-menu offset-y>
+          <v-menu>
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="normal" v-bind="attrs" v-on="on"> ACTIONS </v-btn>
             </template>
           <v-list>
-            <v-list-item v-for="(item, index) in actions" :key="index" @click="methods.btn_action(item.title)">
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+
+            <v-list-item v-for="(item, index) in actions" :key="index" @click="methods.showReport()">
+
+
+              <v-list-item-title >{{ item.title }}</v-list-item-title>
             </v-list-item>
+
           </v-list>
         </v-menu>
         </div>
@@ -35,21 +35,25 @@
   </template>
 
 <script>
+import {APIService} from '../http/APIService';
+const apiService= new APIService();
 
 export default {
   name: 'Reports',
-  data() {
+  data () {
     return {
       msg: 'This is the reports component',
+      act: '',
+      reports1: '',
       actions: [
         {
-          'title': 'Unpublish'
+          'title': 'Unpublish',
         },
         {
-          'title': 'Modify'
+          'title': 'Modify',
         },
         {
-          'title': 'Delete'
+          'title': 'Delete',
         }
       ],
       reports: [
@@ -85,11 +89,23 @@ export default {
         },
       ],
       methods: {
-        btn_action(action) {
-          if(action=='Delete'){
+        btn_action(item) {
+          if (item.title == 'Delete') {
             alert("Are you sure you want to delete this report permanently?")
           }
-
+        },
+        showReport() {
+          console.log("hello")
+        },
+        editReport() {
+          apiService.editReport(this.report).then(response => {
+            if (response.status == 200) {
+              this.report = reponse.data;
+              router.push('/report-list/update');
+            } else {
+              this.showMsg = "error";
+            }
+          })
         }
       }
     }

@@ -26,10 +26,7 @@
             md="8"
         >
           <v-card class="elevation-9" id="mainCard">
-            <v-container
-              fluid
-              grid-list-md
-            >
+            <v-container fluid grid-list-md>
               <v-row>
                 <v-col cols="6">
                   <v-card flat color="#401a19" class="d-flex justify-center">

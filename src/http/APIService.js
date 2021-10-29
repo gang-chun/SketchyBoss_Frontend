@@ -15,7 +15,7 @@ export class APIService {
   }
 
   getReportList() {
-    const url = `${API_URL}/api/reports/`;
+    const url = `${API_URL}/api/report/`;
     let jwtToken = localStorage.getItem('token');
     console.log(":::jwtToken:::::"+jwtToken);
     const headers = {Authorization: `jwt ${jwtToken}`};

@@ -2,19 +2,26 @@
 <template >
   <v-app class="content">
     <h2>{{ msg }}</h2>
+
     <v-form>
       <v-row>
         <v-col cols="6" md="3">
-          <v-select :items="items"></v-select>
+          <v-select :items="fields" v-model="searchField"></v-select>
         </v-col>
         <v-col cols="12" md="6">
-          <v-text-field style="color: white; margin-left: 20px"></v-text-field>
+          <v-text-field v-model="input" style="color: white; margin-left: 20px"></v-text-field>
         </v-col>
         <v-col cols="6" md="3">
-          <v-btn id='searchBTN' elevation="8">
+          <v-btn id='searchBTN' elevation="8" :to="'/search/' + searchField + '/' + input">
             Search
           </v-btn>
+
+
+
         </v-col>
+      </v-row>
+      <v-row>
+        {{ searchField }} {{ input }}
       </v-row>
     </v-form>
   </v-app>
@@ -25,14 +32,16 @@ export default {
   name: 'Search',
   data () {
     return {
-      items: ['Person\'s Name','Company'],
+      searchField: '',
+      input: '',
+      fields: ['Person', 'Company'],
       msg: 'This is the search component',
     }
   },
       methods: {
-        showAccountNav() {
-          this.$emit('showSearch', this.template)
-      },
+        enterSearch() {
+          this.$emit('searchEntered', this.searchField, this.input);
+        },
       }
 
 
