@@ -22,6 +22,16 @@ export class APIService {
     return axios.get(url, {headers: headers});
   }
 
+  getCompanyList() {
+    const url = `${API_URL}/api/companies/`;
+    let jwtToken = localStorage.getItem('token');
+    console.log(":::jwtToken:::::"+jwtToken);
+    const headers = {Authorization: `jwt ${jwtToken}`};
+    return axios.get(url, {headers: headers});
+  }
+
+
+
   addNewMovie(movie){
     const url = `${API_URL}/api/movies/`;
     let jwtToken = localStorage.getItem('token');
