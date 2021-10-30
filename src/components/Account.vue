@@ -33,7 +33,6 @@
             <div v-else>
               <search></search>
             </div>
-
           </v-card>
       </v-col>
     </v-row>
@@ -47,6 +46,7 @@
   import Search from '../components/Search'
   import Reports from '../components/Reports'
   import Settings from '../components/Settings'
+
 
   export default {
     name: 'Account',
@@ -65,14 +65,13 @@
           { title: 'Reports', icon: 'mdi-forum' },
           { title: 'Settings', icon: 'mdi-tools' },
         ],
+
       }
     },
-    methods: {
-
+      methods: {
       sendSearch() {
           console.log('test')
         }
-
     }
   }
 </script>
