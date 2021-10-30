@@ -5,13 +5,13 @@
 
     <v-form>
       <v-row>
-        <v-col cols="6" md="3">
+        <v-col cols="12" xl="3" lg="3" md="3" sm="12">
           <v-select :items="fields" v-model="searchField"></v-select>
         </v-col>
-        <v-col cols="12" md="6">
+        <v-col cols="12" xl="6" lg="6" md="6" sm="12">
           <v-text-field v-model="input" style="color: white; margin-left: 20px"></v-text-field>
         </v-col>
-        <v-col cols="6" md="3">
+        <v-col cols="12" xl="3" lg="3" md="3" sm="12">
           <v-btn id='searchBTN' elevation="8" :to="'/search/' + searchField + '/' + input">
             Search
           </v-btn>
@@ -59,8 +59,8 @@ export default {
 
 #searchBTN {
   font-weight: bolder;
-  margin-left: 20px;
-  padding: 20px;
+  margin-left: 10px;
+  padding: 10px;
   color: white;
   background-color: #401a19;
 }
