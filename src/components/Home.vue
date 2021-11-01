@@ -36,7 +36,20 @@
                   </v-card>
                 </v-col>
                 <v-col colors="6">
-                    <v-card-text id="intro">Hello creeper . . . </v-card-text>
+                    <v-card-text id="intro" style="font-weight: normal; font-size: 12px;">
+                      <strong>Purpose:</strong> The purpose of this project is to build a
+                      preliminary full stack application that allows people to warn other people of bad behavior in the workplace.
+                      The term “whisper networks” describes the networks that have formed for women to warn other women
+                      of alleged sexual harassers or abusers. Our app will allow victims of abuse to report these incidents,
+                      not to incite legal litigations, but to simply warn others of bad actors while keeping their identity anonymous.
+                      <br>
+                      <br>
+                      <strong>Users:</strong> The most common type of user for this app will be women,
+                      but will not exclude men as they can face abuse/harrassment in the workplace as well.
+                      Users will be able to post reports, edit their own reports and unpublish or completely delete their reports.
+                      They will also be able to look up different companies to review
+                      whether or not there have been any reports about bad actors made within this company.
+                    </v-card-text>
                 </v-col>
 
               </v-row>

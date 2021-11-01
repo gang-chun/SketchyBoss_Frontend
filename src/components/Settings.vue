@@ -2,6 +2,20 @@
 <template >
   <v-app class="content">
     <h2>{{ msg }}</h2>
+    <v-list>
+      <v-list-item link>
+          1. Change username
+      </v-list-item>
+      <v-list-item link>
+          2. Reset Password
+      </v-list-item>
+      <v-list-item link>
+          3. Unpost and archive all reports
+      </v-list-item>
+      <v-list-item link>
+          4. Permanently delete all reports
+      </v-list-item>
+    </v-list>
   </v-app>
   </template>
 
@@ -11,7 +25,7 @@ export default {
   name: 'Settings',
   data() {
     return {
-      msg: 'This is the settings component',
+      msg: 'Account Settings',
     }
   },
 }
