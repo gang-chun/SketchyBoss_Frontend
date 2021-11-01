@@ -4,17 +4,17 @@
 
     <v-expansion-panels>
       <v-expansion-panel v-for="(report,index) in reports" :key="index">
-        <v-expansion-panel-header >
-          <v-card elevation="0" style="margin: 0px; padding: 0px;">
-            <v-card-title style="padding-left: 0px;">{{report.title}}</v-card-title>
-            <v-card-subtitle style="padding-left: 0px;">Created: {{report.created_date}}</v-card-subtitle>
+        <v-expansion-panel-header>
+          <v-card elevation="0" style="margin: 0; padding: 0;">
+            <v-card-title style="padding-left: 0;">{{report.title}}</v-card-title>
+            <v-card-subtitle style="padding-left: 0;">Created: {{report.created_date}}</v-card-subtitle>
           </v-card>
         </v-expansion-panel-header>
 
         <v-expansion-panel-content>
-          <strong>{{ report.company}} - {{report.actor}}</strong>
+          <strong>{{ report.company_name }} - {{report.actor_name }}</strong>
           <br>
-          {{ report.content}}
+          {{ report.content }}
           <br>
           <div class="btns">
             <v-menu>
@@ -83,12 +83,12 @@ export default {
           console.log('pressed delete report action')
         },
         editReport() {
-          apiService.editReport(this.report).then(response => {
+          apiService.updateReport(this.report).then(response => {
             if (response.status == 200) {
-              this.report = reponse.data;
+              this.report = response.data;
               router.push('/report-list/update');
             } else {
-              this.showMsg = "error";
+              this.showMsg = "Error";
             }
           })
         }
