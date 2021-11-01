@@ -5,14 +5,6 @@ export class APIService {
   constructor() {
 
   }
- // Placeholders, do not delete!
-  getMovie(param_pk) {
-    const url = `${API_URL}/api/movies/${param_pk}`;
-    let jwtToken = localStorage.getItem('token');
-    console.log(":::jwtToken:::::"+jwtToken);
-    const headers = {Authorization: `jwt ${jwtToken}`};
-    return axios.get(url, {headers: {Authorization: `jwt ${jwtToken}`}});
-  }
 
   getReportList() {
     const url = `${API_URL}/api/reports/`;
@@ -20,6 +12,35 @@ export class APIService {
     console.log(":::jwtToken:::::"+jwtToken);
     const headers = {Authorization: `jwt ${jwtToken}`};
     return axios.get(url, {headers: headers});
+  }
+
+  getReport(report) {
+    const url = `${API_URL}/api/reports/${report}`;
+    let jwtToken = localStorage.getItem('token');
+    console.log(":::jwtToken:::::"+jwtToken);
+    const headers = {Authorization: `jwt ${jwtToken}`};
+    return axios.get(url, {headers: headers});
+  }
+
+  addNewReport(report){
+    const url = `${API_URL}/api/reports/`;
+    let jwtToken = localStorage.getItem('token');
+    const headers = {Authorization: `jwt ${jwtToken}`};
+    return axios.post(url, report, {headers: headers});
+  }
+
+  updateReport(report){
+    const url = `${API_URL}/api/reports/${report}`;
+    let jwtToken = localStorage.getItem('token');
+    const headers = {Authorization: `jwt ${jwtToken}`};
+    return axios.put(url, report, {headers: headers});
+  }
+
+  deleteReport(report){
+    const url = `${API_URL}/api/reports/${report}`;
+    let jwtToken = localStorage.getItem('token');
+    const headers = {Authorization: `jwt ${jwtToken}`};
+    return axios.delete(url, {headers: headers});
   }
 
   getCompanyList() {
@@ -30,24 +51,66 @@ export class APIService {
     return axios.get(url, {headers: headers});
   }
 
-
-
-  addNewMovie(movie){
-    const url = `${API_URL}/api/movies/`;
+  getCompany(company) {
+    const url = `${API_URL}/api/companies/${company}`;
     let jwtToken = localStorage.getItem('token');
+    console.log(":::jwtToken:::::"+jwtToken);
     const headers = {Authorization: `jwt ${jwtToken}`};
-    return axios.post(url, movie, {headers: headers});
+    return axios.get(url, {headers: headers});
   }
 
-  updateMovie(movie){
-    const url = `${API_URL}/api/movies/${movie.pk}`;
+  addNewCompany(company) {
+    const url = `${API_URL}/api/companies/`;
     let jwtToken = localStorage.getItem('token');
     const headers = {Authorization: `jwt ${jwtToken}`};
-    return axios.put(url, movie, {headers: headers});
+    return axios.post(url, company, {headers: headers});
   }
 
-  deleteMovie(movie_Pk){
-    const url = `${API_URL}/api/movies/${movie_Pk}`;
+  updateCompany(company) {
+    const url = `${API_URL}/api/companies/${company}`;
+    let jwtToken = localStorage.getItem('token');
+    const headers = {Authorization: `jwt ${jwtToken}`};
+    return axios.put(url, company, {headers: headers});
+  }
+
+  deleteCompany(company) {
+    const url = `${API_URL}/api/companies/${company}`;
+    let jwtToken = localStorage.getItem('token');
+    const headers = {Authorization: `jwt ${jwtToken}`};
+    return axios.delete(url, {headers: headers});
+  }
+
+  getActorList() {
+    const url = `${API_URL}/api/actors/`;
+    let jwtToken = localStorage.getItem('token');
+    const headers = {Authorization: `jwt ${jwtToken}`};
+    return axios.get(url, {headers: headers});
+  }
+
+  getActor(actor) {
+    const url = `${API_URL}/api/actors/${actor}`;
+    let jwtToken = localStorage.getItem('token');
+    console.log(":::jwtToken:::::"+jwtToken);
+    const headers = {Authorization: `jwt ${jwtToken}`};
+    return axios.get(url, {headers: headers});
+  }
+
+  addNewActor(actor){
+    const url = `${API_URL}/api/actors/`;
+    let jwtToken = localStorage.getItem('token');
+    const headers = {Authorization: `jwt ${jwtToken}`};
+    return axios.post(url, actor, {headers: headers});
+  }
+
+  updateActor(actor){
+    const url = `${API_URL}/api/actors/${actor}`;
+    let jwtToken = localStorage.getItem('token');
+    const headers = {Authorization: `jwt ${jwtToken}`};
+    return axios.put(url, actor, {headers: headers});
+  }
+
+  deleteActor(actor){
+    const url = `${API_URL}/api/actors/${actor}`;
     let jwtToken = localStorage.getItem('token');
     const headers = {Authorization: `jwt ${jwtToken}`};
     return axios.delete(url, {headers: headers});
