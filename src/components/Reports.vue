@@ -1,7 +1,6 @@
 
 <template>
   <v-app class="content">
-
     <v-expansion-panels>
       <v-expansion-panel v-for="(report,index) in reports" :key="index">
         <v-expansion-panel-header>
@@ -22,14 +21,14 @@
                 <v-btn color="normal" v-bind="attrs" v-on="on"> ACTIONS </v-btn>
               </template>
               <v-list>
-                <v-list-item @click="deleteReport()">
+                <v-list-item @click="">
                   <v-list-item-title>Unpublish</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="deleteReport()">
+                <v-list-item @click="editReport()">
                   <v-list-item-title >Modify</v-list-item-title>
                 </v-list-item>
-                <v-list-item @click="deleteReport()">
-                  <v-list-item-title >Delete</v-list-item-title>
+                <v-list-item v-on:click="delete_report(report)">
+                  <v-list-item-title>Delete</v-list-item-title>
                 </v-list-item>
               </v-list>
             </v-menu>
@@ -38,13 +37,12 @@
       </v-expansion-panel>
     </v-expansion-panels>
   </v-app>
-  </template>
+</template>
 
 <script>
 import {APIService} from '../http/APIService';
 import router from '../router';
-const apiService= new APIService();
-
+const apiService = new APIService();
 
 export default {
   name: 'Reports',
@@ -56,15 +54,15 @@ export default {
       reportSize: 0,
     }
   },
+
   mounted () {
-    this.getReportList();
+    this.getReports();
     },
-      methods: {
-        getReportList() {
+
+  methods: {
+    getReports() {
           apiService.getReportList().then(response => {
             this.reports = response.data.data;
-            console.log(response.data.data);
-            console.log(response.data);
             this.reportSize = this.reports.length;
             if (localStorage.getItem("isAuthenticates")
               && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {
@@ -78,23 +76,33 @@ export default {
               router.push("/auth");
             }
           });
-        },
-        deleteReport(){
-          console.log('pressed delete report action')
-        },
-        editReport() {
-          apiService.updateReport(this.report).then(response => {
-            if (response.status == 200) {
+    },
+    delete_report(report) {
+      apiService.deleteReport(report.id).then(response => {
+        if (response.status === 204) {
+          this.getReportList()
+          router.push('/account')
+        }
+      }).catch(error => {
+        if (error.response.status === 401) {
+          localStorage.removeItem('isAuthenticated');
+          localStorage.removeItem('log_user');
+          localStorage.removeItem('token');
+          router.push('/auth');
+        }
+      });
+    },
+    edit_report() {
+          reportApi.updateReport(this.report).then(response => {
+            if (response.status === 200) {
               this.report = response.data;
               router.push('/report-list/update');
             } else {
-              this.showMsg = "Error";
+              this.showMsg = "error";
             }
           })
         }
-      }
-
-
+  }
 }
 </script>
 
