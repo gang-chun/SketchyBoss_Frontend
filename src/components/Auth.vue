@@ -56,9 +56,22 @@
                 />
 
               </v-container>
-              <v-btn :disabled="!valid" @click="login()" id="btn">Login</v-btn>
+
+              <v-btn small :disabled="!valid" @click="login()" class="btn">Login</v-btn>
+              <v-btn small @click="passwordReset()" class="btn">Password Reset</v-btn>
             </v-form>
           </v-card-text>
+        </v-card>
+
+
+        <v-card v-show="passwordResetContain == true" style="margin-top: 20px; padding: 5px;" class="elevation-6">
+          <v-card-subtitle>Enter your email to send a reset link for your password</v-card-subtitle>
+            <v-container>
+                <v-text-field v-model="emailReset" label="email" maxlength="70"/>
+                <v-btn small @click="sendReset()" class="btn">Send Reset</v-btn>
+            </v-container>
+          <v-card-text v-show="resetSent" style="color: red;">Check your email for the reset link.</v-card-text>
+
         </v-card>
       </v-col>
     </v-row>
@@ -75,6 +88,9 @@
 
     data: () => ({
       credentials: {},
+      passwordResetContain: false,
+      emailReset: '',
+      resetSent: false,
       valid: true,
       showMsg: '',
       loading: false,
@@ -92,6 +108,13 @@
       showPassword: false,
     }),
     methods: {
+      passwordReset() {
+        this.passwordResetContain = true;
+      },
+      sendReset() {
+        this.resetSent = true
+        console.log("password reset was sent to email")
+      },
       login() {
         // checking if the input is valid
         if (this.$refs.form.validate()) {
@@ -120,7 +143,7 @@
 <style>
 
 
-#btn {
+.btn {
   background-color: #401a19;
   color: white;
 }

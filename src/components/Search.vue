@@ -7,7 +7,7 @@
 
 
 
-<v-expansion-panels v-on="companyTable">
+<!--v-expansion-panels v-on="companyTable">
       <v-expansion-panel v-for="(company,index) in companies" :key="index">
         <v-expansion-panel-header >
           <v-card elevation="0" style="margin: 0px; padding: 0px;">
@@ -19,7 +19,7 @@
         <v-expansion-panel-content>
         </v-expansion-panel-content>
       </v-expansion-panel>
-</v-expansion-panels>
+</v-expansion-panels -->
 
 
 
@@ -38,22 +38,16 @@
             Search
           </v-btn>
 
-          <v-btn elevation="8" @click="getCompanyList()">
-            Search Companies
-          </v-btn>
 
 
 
 
         </v-col>
       </v-row>
-      <v-row>
-        {{ searchField }} {{ input }}
-      </v-row>
 
     </v-form>
 
-          <v-row>
+          <!--v-row>
         <v-data-table v-on="searchField = 'Company'"
               :headers="companyHeads"
               :items="companies"
@@ -66,7 +60,7 @@
                         <td align="left">{{ props.item.industry }}</td>                      </tr>
                     </template>
               </v-data-table>
-      </v-row>
+      </v-row-->
 
   </v-app>
   </template>
