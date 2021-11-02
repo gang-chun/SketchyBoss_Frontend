@@ -69,8 +69,8 @@
             <v-container>
                 <v-text-field v-model="emailReset" label="email" maxlength="70"/>
                 <v-btn small @click="sendReset()" class="btn">Send Reset</v-btn>
-                <v-card-text v-show="resetSent" style="color: red;">Check your email for the reset link.</v-card-text>
             </v-container>
+          <v-card-text v-show="resetSent" style="color: red;">Check your email for the reset link.</v-card-text>
 
         </v-card>
       </v-col>
