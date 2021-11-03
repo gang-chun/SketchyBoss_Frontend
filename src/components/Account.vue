@@ -11,10 +11,10 @@
           <v-spacer></v-spacer>
         <v-col cols="12" xl="8" lg="8" md="8" sm="8" xs="9" justify="center">
           <v-card elevation="24" class="contentCard">
-            <div v-if="currPage == 'Reports'">
+            <div v-if="currPage === 'Reports'">
               <reports></reports>
             </div>
-            <div v-else-if="currPage == 'Settings'">
+            <div v-else-if="currPage === 'Settings'">
               <settings></settings>
             </div>
             <div v-else>
@@ -38,10 +38,10 @@
     <div class="hidden-sm-and-up">
         <v-col xs="12" justify="center">
           <v-card elevation="24" class="contentCard">
-            <div v-if="currPage == 'Reports'">
+            <div v-if="currPage === 'Reports'">
               <reports></reports>
             </div>
-            <div v-else-if="currPage == 'Settings'">
+            <div v-else-if="currPage === 'Settings'">
               <settings></settings>
             </div>
             <div v-else>
@@ -100,11 +100,6 @@
 #navContain {
   background-color: transparent;
 }
-#contentCard {
-  display: block;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
+
 </style>
 

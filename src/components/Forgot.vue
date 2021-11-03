@@ -22,7 +22,7 @@
                 :disabled="!valid"
                 color="success"
                 class="mr-4"
-                @click="">
+                @click="send_password_reset">
                 Submit
               </v-btn>
             </v-form>
@@ -48,7 +48,18 @@ export default {
   }),
 
   methods: {
+    async send_password_reset() {
+      try {
+        const response = await axios.post('http://127.0.0.1:8000/api/password_reset/', {
+          email: this.email
+        });
 
+        console.log(response);
+      }
+      catch (e){
+        console.error(e);
+      }
+    }
   },
 }
 </script>

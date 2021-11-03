@@ -111,10 +111,6 @@
       passwordReset() {
         window.location = '/auth/forgot'
       },
-      sendReset() {
-        this.resetSent = true
-        console.log("password reset was sent to email")
-      },
       login() {
         // checking if the input is valid
         if (this.$refs.form.validate()) {
