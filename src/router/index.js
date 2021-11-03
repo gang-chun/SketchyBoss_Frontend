@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import Auth from '@/components/Auth'
 import Account from '@/components/Account'
 import SearchPage from '@/components/SearchPage'
+import Forgot from "../components/Forgot";
 
 
 Vue.use(Router)
@@ -32,6 +33,11 @@ export default new Router({
       path: '/auth',
       name: 'Auth',
       component: Auth
+    },
+    {
+      path: '/auth/forgot',
+      name: 'Forgot',
+      component: Forgot
     },
   ]
 })

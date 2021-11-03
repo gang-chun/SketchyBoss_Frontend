@@ -62,8 +62,6 @@
 </template>
 
 <script>
-  import router from '../router';
-
   export default {
     name: 'Home',
     data: () => ({
@@ -73,9 +71,7 @@
       this.getUser();
     },
     methods: {
-      viewMovies() {
-        router.push('/movie-list');
-      },
+
       getUser() {
         if (localStorage.getItem("isAuthenticates")
           && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {

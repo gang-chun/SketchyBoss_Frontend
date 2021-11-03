@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-md>
+  <v-container>
     <v-row align="center" justify="center">
       <v-col cols="12" sm="6" md="4" lg="4">
         <v-card class="mx-auto elevation-6">
@@ -64,7 +64,7 @@
         </v-card>
 
 
-        <v-card v-show="passwordResetContain == true" style="margin-top: 20px; padding: 5px;" class="elevation-6">
+        <v-card v-show="passwordResetContain === true" style="margin-top: 20px; padding: 5px;" class="elevation-6">
           <v-card-subtitle>Enter your email to send a reset link for your password</v-card-subtitle>
             <v-container>
                 <v-text-field v-model="emailReset" label="email" maxlength="70"/>
@@ -109,7 +109,7 @@
     }),
     methods: {
       passwordReset() {
-        this.passwordResetContain = true;
+        window.location = '/auth/forgot'
       },
       sendReset() {
         this.resetSent = true
@@ -125,7 +125,7 @@
             localStorage.setItem('log_user', JSON.stringify(this.credentials.username));
             //router.push("/");
             //router.go(-1);
-             window.location = "/"
+             window.location = "/account"
           }).catch(e => {
             this.loading = false;
             localStorage.removeItem('isAuthenticates');
