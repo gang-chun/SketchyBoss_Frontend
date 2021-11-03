@@ -4,7 +4,7 @@ import Home from '@/components/Home'
 import Auth from '@/components/Auth'
 import Account from '@/components/Account'
 import SearchPage from '@/components/SearchPage'
-import Forgot from "../components/Forgot";
+import Forgot from "@/components/Forgot";
 
 
 Vue.use(Router)
