@@ -121,7 +121,7 @@
             localStorage.setItem('log_user', JSON.stringify(this.credentials.username));
             //router.push("/");
             //router.go(-1);
-             window.location = "/account"
+             window.location = "/"
           }).catch(e => {
             this.loading = false;
             localStorage.removeItem('isAuthenticates');
