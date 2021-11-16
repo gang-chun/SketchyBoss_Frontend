@@ -3,7 +3,7 @@
   <v-app id="contains">
 
       <div class="hidden-sm-and-up">
-        <v-bottom-navigation style="margin: 0px; padding: 0px">
+        <v-bottom-navigation style="margin: 0; padding: 0">
           <v-btn v-for='item in items' :key="item.title" @click="changeContent(item.title)">
             <span>{{item.title}}</span>
             <v-icon>{{ item.icon }}</v-icon>
@@ -41,7 +41,7 @@
         currPage: 'Search',
         items: [
           { title: 'Search', icon: 'mdi-account-search'},
-          { title: 'Reports', icon: 'mdi-forum' },
+          { title: 'My Reports', icon: 'mdi-forum' },
           { title: 'Settings', icon: 'mdi-tools' },
         ],
       }

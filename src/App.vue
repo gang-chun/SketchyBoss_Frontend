@@ -49,7 +49,8 @@
       dialog: false,
       menu: [
         { title: 'Home', url:"/"},
-        { title: 'Account', url: '/account'}
+        { title: 'Account', url: '/account'},
+        { title: 'Reports', url: '/report-list'}
       ]
     }),
 

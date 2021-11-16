@@ -30,7 +30,7 @@ export class APIService {
   }
 
   updateReport(report){
-    const url = `${API_URL}/api/reports/${report}`;
+    const url = `${API_URL}/api/reports/${report.pk}`;
     let jwtToken = localStorage.getItem('token');
     const headers = {Authorization: `jwt ${jwtToken}`};
     return axios.put(url, report, {headers: headers});
@@ -67,7 +67,7 @@ export class APIService {
   }
 
   updateCompany(company) {
-    const url = `${API_URL}/api/companies/${company}`;
+    const url = `${API_URL}/api/companies/${company.pk}`;
     let jwtToken = localStorage.getItem('token');
     const headers = {Authorization: `jwt ${jwtToken}`};
     return axios.put(url, company, {headers: headers});
@@ -103,7 +103,7 @@ export class APIService {
   }
 
   updateActor(actor){
-    const url = `${API_URL}/api/actors/${actor}`;
+    const url = `${API_URL}/api/actors/${actor.pk}`;
     let jwtToken = localStorage.getItem('token');
     const headers = {Authorization: `jwt ${jwtToken}`};
     return axios.put(url, actor, {headers: headers});
