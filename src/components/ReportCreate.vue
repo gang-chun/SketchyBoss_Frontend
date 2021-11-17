@@ -53,7 +53,7 @@
                       label="Actor"
                       :items="actorList"
                       item-value="id"
-                      item-text="fName"
+                      :item-text="item => item.fName + ' ' + item.lName"
                       required
                     ></v-select>
 
@@ -66,11 +66,6 @@
                       required
                     ></v-select>
 
-                    <v-text-field
-                      v-model="report.user"
-                      label="Created By"
-                      disabled
-                    />
                   </v-container>
                   <v-btn v-if="!isUpdate" class="blue white--text" @click="createReport">Save</v-btn>
                   <v-btn v-if="isUpdate" class="blue white--text" @click="updateReport">Update</v-btn>
@@ -98,6 +93,7 @@ export default {
     return {
       actors: [],
       companies: [],
+      user: {},
       showError: false,
       report: {},
       pageTitle: "Add New Report",
@@ -191,9 +187,25 @@ export default {
           this.showMsg = "error";
         }
       });
+    },
+    getUser() {
+      apiService.getUser(this.user).then(response => {
+        if (response.status === 200) {
+          this.user = response.data;
+        } else {
+          this.showMsg = "error";
+        }
+      }).catch(error => {
+        if (error.response.status === 401) {
+          router.push("/auth");
+        } else if (error.response.status === 400) {
+          this.showMsg = "error";
+        }
+      });
     }
   },
   mounted() {
+    this.getUser();
     this.getActors();
     this.getCompanies();
     if (this.$route.params.pk) {
