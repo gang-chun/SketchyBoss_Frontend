@@ -49,20 +49,28 @@
                     />
 
                     <v-select
-                      v-model="report.actor_name"
+                      v-model="report.actor"
                       label="Actor"
                       :items="actorList"
-                      item-value='pk'
-                      item-text='actor_name'
+                      item-value="id"
+                      item-text="fName"
+                      required
                     ></v-select>
 
                     <v-select
-                      v-model="report.company_name"
+                      v-model="report.company"
                       label="Company"
                       :items="companyList"
-                      item-value='pk'
-                      item-text='company_name'
+                      item-value="id"
+                      item-text="name"
+                      required
                     ></v-select>
+
+                    <v-text-field
+                      v-model="report.user"
+                      label="Created By"
+                      disabled
+                    />
                   </v-container>
                   <v-btn v-if="!isUpdate" class="blue white--text" @click="createReport">Save</v-btn>
                   <v-btn v-if="isUpdate" class="blue white--text" @click="updateReport">Update</v-btn>

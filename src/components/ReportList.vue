@@ -183,10 +183,10 @@ export default {
       }
     },
     updateReport(report) {
-      router.push('/report-create/' + report.pk);
+      router.push('/report-create/' + report.id);
     },
     deleteReport(report) {
-      apiService.deleteReport(report.pk).then(response => {
+      apiService.deleteReport(report.id).then(response => {
         if (response.status === 204) {
           router.push('/report-list/deleted/')
           this.getReports()
