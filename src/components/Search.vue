@@ -4,7 +4,7 @@
         <v-row>
           <v-col cols="12" xl="12" lg="12" justify="center" align="center">
             <v-card style="padding: 20px" elevation="24" justify="center">
-              <v-card-title><h2>Search the Sketchy Boss database . . </h2></v-card-title>
+              <v-card-title>Search the Sketchy Boss database...</v-card-title>
                 <v-form>
                   <v-row class="pa-4 justify-space-between" align="center">
                     <v-col cols="12" xl="3" lg="3" md="3" sm="3">

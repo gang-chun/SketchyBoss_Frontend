@@ -51,7 +51,7 @@
                 <td nowrap="true">{{ props.item.title }}</td>
                 <td nowrap="true">{{ props.item.actor_name }}</td>
                 <td nowrap="true">{{ props.item.company_name }}</td>
-                <td nowrap="true">{{ props.item.updated_date }}</td>
+                <td nowrap="true">{{ formatDate(props.item.updated_date) }}</td>
                 <td><v-icon @click="updateReport(props.item)">mdi-pencil</v-icon></td>
                 <td><v-icon @click="deleteReport(props.item)">mdi-delete</v-icon></td>
               </tr>
@@ -116,6 +116,7 @@
 
 import router from '../router';
 import {APIService} from '../http/APIService';
+import moment from 'moment';
 const apiService = new APIService();
 
 export default {
@@ -128,9 +129,9 @@ export default {
     isMobile: false,
     headers: [
       {text: 'Title', sortable: false, align: 'left',},
-      {text: 'Reportee', sortable: false, align: 'left',},
+      {text: 'Actor', sortable: false, align: 'left',},
       {text: 'Company', sortable: false, align: 'left',},
-      {text: 'Created/Modified', sortable: false, align: 'left',},
+      {text: 'Last Updated', sortable: false, align: 'left',},
       {text: 'Update', sortable: false, align: 'left',},
       {text: 'Delete', sortable: false, align: 'left',}
 
@@ -150,6 +151,10 @@ export default {
       if (this.$route.params.msg) {
         this.showMsg = this.$route.params.msg;
       }
+    },
+    formatDate(value) {
+      return moment(value).format("MMM DD, YYYY") + ' at ' +
+        moment(value).format("hh:mma")
     },
     getReports() {
       apiService.getReportList().then(response => {
