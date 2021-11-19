@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_URL = 'https://sketchyboss.herokuapp.com' /*'https://sketchyboss.herokuapp.com';*/ /* 'http://localhost:8000' http://127.0.0.1:8000/ or  'https://movies-groyce.pythonanywhere.com/'*/
+const API_URL = 'http://localhost:8000' /*'https://sketchyboss.herokuapp.com' /*'https://sketchyboss.herokuapp.com';*/ /* 'http://localhost:8000' http://127.0.0.1:8000/ or  'https://movies-groyce.pythonanywhere.com/'*/
 
 export class APIService {
   constructor() {

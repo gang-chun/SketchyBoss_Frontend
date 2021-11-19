@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Auth from '@/components/Auth'
 import Account from '@/components/Account'
+import Search from '@/components/Search'
 import SearchPage from '@/components/SearchPage'
 import Forgot from "@/components/Forgot";
 import ReportList from "@/components/ReportList";
@@ -43,6 +44,11 @@ export default new Router({
       path: '/report-create/:pk',
       name: 'ReportUpdate',
       component: ReportCreate
+    },
+    {
+      path: '/search',
+      name: 'Search',
+      component: Search,
     },
     {
       path: '/search/:searchField/:input',

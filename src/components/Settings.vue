@@ -1,23 +1,18 @@
-
-<template >
+<template>
   <v-app class="content">
-    <h2>{{ msg }}</h2>
     <v-list>
       <v-list-item link>
-          1. Change username
+          1. Change Password
       </v-list-item>
       <v-list-item link>
-          2. Reset Password
+          2. Unpost and archive all reports
       </v-list-item>
       <v-list-item link>
-          3. Unpost and archive all reports
-      </v-list-item>
-      <v-list-item link>
-          4. Permanently delete all reports
+          3. Permanently delete all reports
       </v-list-item>
     </v-list>
   </v-app>
-  </template>
+</template>
 
 <script>
 
@@ -37,6 +32,6 @@ export default {
   display: block;
   justify-content: center;
   align-content: center;
-  padding: 40px;
+  padding: 20px;
 }
 </style>

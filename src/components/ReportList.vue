@@ -1,44 +1,44 @@
 <template>
-  <v-main>
-    <!-- Welcome title -->
-    <v-container fluid>
-      <v-row align="center" justify="center">
-        <v-col cols="12" align="center" justify="center">
-          <blockquote>
-            Welcome {{validUserName}}!
-            <footer>
-              <small>
-                <em>&mdash;Eagle Financial Services, your Midwest Financial Services Partner.</em>
-              </small>
-            </footer>
-          </blockquote>
-        </v-col>
-        <v-col  cols="12" md="10" lg="10" align="center" justify="center">
-          <v-alert v-if="showMsg === 'new'"
-                   dismissible
-                   :value="true"
-                   type="success"
-          >
-            New report has been created.
-          </v-alert>
-          <v-alert v-if="showMsg === 'update'" dismissible
-                   :value="true"
-                   type="success"
-          >
-            Report information has been updated.
-          </v-alert>
-          <v-alert v-if="showMsg === 'deleted'" dismissible
-                   :value="true"
-                   type="success"
-          >
-            Selected Report has been deleted.
-          </v-alert>
-        </v-col>
-      </v-row>
+  <v-app class="content" style="background-color: #4e3a43;">
+    <v-container pa-12>
+      <v-row>
+        <v-col cols="12" xl="12" md="12" lg="12" align="center" justify="center">
 
-      <!-- Data table -->
-      <v-row align="center" justify="center">
-        <v-col cols="12" md="10" v-resize="onResize">
+          <!----- Alert if reports have been updated/created/deleted ----->
+          <div v-show="showMsg ==='new'">
+              <v-alert v-if="showMsg === 'new'"
+                       dismissible
+                       :value="true"
+                       type="success"
+              >
+                New report has been created.
+              </v-alert>
+              <v-alert v-if="showMsg === 'update'" dismissible
+                       :value="true"
+                       type="success"
+              >
+                Report information has been updated.
+              </v-alert>
+              <v-alert v-if="showMsg === 'deleted'" dismissible
+                       :value="true"
+                       type="success"
+              >
+                Selected Report has been deleted.
+              </v-alert>
+            </div>
+          </v-col>
+
+      <!------------------------- Data table ----------------------------->
+        <v-col cols="12" lg="12" md="12">
+          <v-card style="padding: 20px" elevation="24">
+            <v-card-title class="justify-space-between">
+              <h2>My Reports</h2>
+                <v-btn class="white--text"
+                         style="background-color: #401a19;"
+                         elevation="6"
+                         @click="addNewReport">New Report</v-btn>
+            </v-card-title>
+
           <v-data-table
             :headers="headers"
             :items="reports"
@@ -48,10 +48,7 @@
           >
             <template v-slot:item="props">
               <tr>
-                <td>{{ props.item.title }}</td>
-                <td>{{ props.item.content }}</td>
-                <td nowrap="true">{{ props.item.city }}</td>
-                <td nowrap="true">{{ props.item.state }}</td>
+                <td nowrap="true">{{ props.item.title }}</td>
                 <td nowrap="true">{{ props.item.actor_name }}</td>
                 <td nowrap="true">{{ props.item.company_name }}</td>
                 <td nowrap="true">{{ props.item.updated_date }}</td>
@@ -107,11 +104,11 @@
               </v-row>
             </template>
           </v-data-iterator>
-          <v-btn class="blue mt-4 white--text" @click="addNewReport">Add Report</v-btn>
+          </v-card>
         </v-col>
       </v-row>
     </v-container>
-  </v-main>
+  </v-app>
 </template>
 
 
@@ -131,12 +128,9 @@ export default {
     isMobile: false,
     headers: [
       {text: 'Title', sortable: false, align: 'left',},
-      {text: 'Content', sortable: false, align: 'left',},
-      {text: 'City', sortable: false, align: 'left',},
-      {text: 'State', sortable: false, align: 'left',},
-      {text: 'Actor Name', sortable: false, align: 'left',},
-      {text: 'Company Name', sortable: false, align: 'left',},
-      {text: 'Last Updated', sortable: false, align: 'left',},
+      {text: 'Reportee', sortable: false, align: 'left',},
+      {text: 'Company', sortable: false, align: 'left',},
+      {text: 'Created/Modified', sortable: false, align: 'left',},
       {text: 'Update', sortable: false, align: 'left',},
       {text: 'Delete', sortable: false, align: 'left',}
 
@@ -203,3 +197,6 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+</style>

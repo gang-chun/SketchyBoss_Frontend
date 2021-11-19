@@ -1,7 +1,38 @@
-
-<template >
+<template>
   <v-app class="content">
-    <h2>{{ msg }}</h2>
+      <v-container pa-14 fluid>
+        <v-row>
+          <v-col cols="12" xl="12" lg="12" justify="center" align="center">
+            <v-card style="padding: 20px" elevation="24" justify="center">
+              <v-card-title><h2>Search the Sketchy Boss database . . </h2></v-card-title>
+                <v-form>
+                  <v-row class="pa-4 justify-space-between" align="center">
+                    <v-col cols="12" xl="3" lg="3" md="3" sm="3">
+                      <v-select :items="fields" v-model="searchField"></v-select>
+                    </v-col>
+                    <v-col cols="12" xl="7" lg="7" md="7" sm="7">
+                        <v-text-field
+                          v-model="input"
+                          style="color: white; padding-left: 15px"
+                        ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" xl="2" lg="2" md="2" sm="1" class="justify-center align-self-center">
+                      <v-btn id='searchBTN' elevation="8" :to="'/search/' + searchField + '/' + input">
+                        Search
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </v-form>
+              <v-data-table>
+
+              </v-data-table>
+
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+
+
 
 
 
@@ -25,27 +56,7 @@
 
 
 
-    <v-form>
-      <v-row>
-        <v-col cols="12" xl="3" lg="3" md="3" sm="12">
-          <v-select :items="fields" v-model="searchField"></v-select>
-        </v-col>
-        <v-col cols="12" xl="6" lg="6" md="6" sm="12">
-          <v-text-field v-model="input" style="color: white; margin-left: 20px"></v-text-field>
-        </v-col>
-        <v-col cols="12" xl="3" lg="3" md="3" sm="12">
-          <v-btn id='searchBTN' elevation="8" :to="'/search/' + searchField + '/' + input">
-            Search
-          </v-btn>
 
-
-
-
-
-        </v-col>
-      </v-row>
-
-    </v-form>
 
           <!--v-row>
         <v-data-table v-on="searchField = 'Company'"
@@ -63,7 +74,7 @@
       </v-row-->
 
   </v-app>
-  </template>
+</template>
 
 <script>
 import {APIService} from '../http/APIService';
@@ -76,7 +87,7 @@ export default {
     return {
       searchField: '',
       input: '',
-      fields: ['Person', 'Company'],
+      fields: ['By Name', 'By Company'],
       companies: [],
       companySize: 0,
       companyTable: true,
@@ -124,13 +135,13 @@ export default {
 .content {
   display: flex;
   justify-content: flex-start;
-  padding: 40px;
+  padding: 0;
+  margin: 0;
+  background-color: #4e3a43;
 }
 
 #searchBTN {
   font-weight: bolder;
-  margin-left: 10px;
-  padding: 10px;
   color: white;
   background-color: #401a19;
 }

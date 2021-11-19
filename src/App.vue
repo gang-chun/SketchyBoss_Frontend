@@ -1,19 +1,20 @@
 <template>
   <v-app id="page">
     <v-app-bar app color="black">
+      <v-btn style="background-color: black" :to="home.url">
       <span>
         <v-img :src="require('@/assets/images/SBLogoBlack.jpg')" height="36px" width="36px" style="border: white solid 1px"></v-img>
       </span>
       <v-toolbar-title>
         <span style="color: white; padding-left: 18px;">SKETCHY</span><span style="font-weight: bold; color: white; padding-left: 2px">BOSS</span>
       </v-toolbar-title>
-
+      </v-btn>
       <v-spacer></v-spacer>
 
       <div class="hidden-xs-only">
-        <v-btn v-for="item in menu" :key="item.title" :to="item.url" text rounded dark>{{ item.title }}</v-btn>
-        <v-btn dark text rounded v-if="!authenticated" @click="login">Log In</v-btn>
-        <v-btn dark text rounded v-if="authenticated" @click="logout">Log Out</v-btn>
+        <v-btn v-for="item in menu" :key="item.title" :to="item.url" text small rounded dark>{{ item.title }}</v-btn>
+        <v-btn dark text rounded small v-if="!authenticated" @click="login">Log In</v-btn>
+        <v-btn dark text rounded small v-if="authenticated" @click="logout">Log Out</v-btn>
       </div>
 
       <div class="hidden-sm-and-up">
@@ -45,12 +46,13 @@
   export default {
     name: 'App',
     data: () => ({
+      home: {url: "/"},
       authenticated: false,
       dialog: false,
       menu: [
-        { title: 'Home', url:"/"},
+        { title: 'Database', url: "/search"},
+        { title: 'My Reports', url: '/report-list'},
         { title: 'Account', url: '/account'},
-        { title: 'Reports', url: '/report-list'}
       ]
     }),
 

@@ -17,7 +17,7 @@
           <v-col cols="12" sm="10" md="10" lg="6" class="align-center">
             <v-card class="login-card">
               <v-card-title>
-                <span class="headline">{{pageTitle}}</span>
+                User is {{ user }}<span class="headline">{{pageTitle}}</span>
               </v-card-title>
               <v-spacer/>
 
@@ -157,7 +157,7 @@ export default {
         if (response.status === 201) {
           this.report = response.data;
           this.showMsg = "";
-          router.push('/report-list/new');
+          router.push('/report-list/');
         }else{
           this.showMsg = "error";
         }
@@ -205,7 +205,7 @@ export default {
     }
   },
   mounted() {
-    this.getUser();
+    //this.getUser();
     this.getActors();
     this.getCompanies();
     if (this.$route.params.pk) {

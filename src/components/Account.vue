@@ -1,80 +1,30 @@
 <template>
-  <v-app>
-
-
-<v-card class="pa-10 hidden-xs-only" id="page">
-  <v-container fluid>
+  <v-app class="content" style="background-color: #4e3a43">
+    <v-container fluid class="pa-14" style="background-color: #4e3a43">
       <v-row>
-        <v-col cols="12" xl="3" lg="3" md="3" sm="3" id="navContain">
-            <Nav @pageChange="currPage = $event"></Nav>
-        </v-col>
-          <v-spacer></v-spacer>
-        <v-col cols="12" xl="8" lg="8" md="8" sm="8" xs="9" justify="center">
-          <v-card elevation="24" class="contentCard">
-            <div v-if="currPage === 'Reports'">
-              <reports></reports>
-            </div>
-            <div v-else-if="currPage === 'Settings'">
-              <settings></settings>
-            </div>
-            <div v-else>
-              <search></search>
-            </div>
+        <v-col cols="12">
+          <v-card elevation="24" style="padding: 20px" class="contentCard">
+            <v-card-title><h2>Account Settings</h2></v-card-title>
+            <settings></settings>
           </v-card>
       </v-col>
     </v-row>
   </v-container>
-</v-card>
-
-
-    <v-card class="pa-2 hidden-sm-and-up" height="auto">
-      <v-container fluid>
-      <v-row no-gutters>
-        <v-col cols="12" xs="12" justify="center">
-          <Nav @pageChange="currPage = $event"></Nav>
-        </v-col>
-      </v-row>
-        <v-row>
-    <div class="hidden-sm-and-up">
-        <v-col xs="12" justify="center">
-          <v-card elevation="24" class="contentCard">
-            <div v-if="currPage === 'Reports'">
-              <reports></reports>
-            </div>
-            <div v-else-if="currPage === 'Settings'">
-              <settings></settings>
-            </div>
-            <div v-else>
-              <search></search>
-            </div>
-          </v-card>
-        </v-col>
-      </div>
-    </v-row>
-
-  </v-container>
-</v-card>
   </v-app>
 </template>
 
 <script>
-  import accountNav from '../components/AccountNav'
-  import Search from '../components/Search'
-  import Reports from '../components/Reports'
   import Settings from '../components/Settings'
 
 
   export default {
     name: 'Account',
     components: {
-      'Nav': accountNav,
-      'Search': Search,
-      'Reports': Reports,
       'Settings': Settings
     },
     data () {
       return {
-        currPage: '',
+        currPage: 'Settings',
         msg: "Parent Method Message",
         items: [
           { title: 'Search', icon: 'mdi-account-search', url: '/account/search'},
@@ -93,13 +43,6 @@
 </script>
 
 <style>
-#page {
-  background-color: #4e3a43;
-}
-
-#navContain {
-  background-color: transparent;
-}
 
 </style>
 
