@@ -1,16 +1,14 @@
 <template>
   <v-app class="content">
-    <v-list>
-      <v-list-item link>
-          1. Change Password
-      </v-list-item>
-      <v-list-item link>
-          2. Unpost and archive all reports
-      </v-list-item>
-      <v-list-item link>
-          3. Permanently delete all reports
-      </v-list-item>
-    </v-list>
+      <v-btn>
+        <span>Change Password</span>
+      </v-btn>
+      <v-btn>
+        <span>Un-publish Reports</span>
+      </v-btn>
+      <v-btn>
+        <span>Delete All Reports</span>
+      </v-btn>
   </v-app>
 </template>
 

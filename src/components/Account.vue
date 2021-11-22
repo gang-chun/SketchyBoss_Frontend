@@ -1,10 +1,10 @@
 <template>
   <v-app class="content" style="background-color: #4e3a43">
-    <v-container fluid class="pa-14" style="background-color: #4e3a43">
+    <v-container fluid>
       <v-row>
         <v-col cols="12">
-          <v-card elevation="24" style="padding: 20px" class="contentCard">
-            <v-card-title><h2>Account Settings</h2></v-card-title>
+          <v-card elevation="24" class="contentCard">
+            <v-card-title>Account Settings</v-card-title>
             <settings></settings>
           </v-card>
       </v-col>

@@ -11,13 +11,13 @@
       </v-btn>
       <v-spacer></v-spacer>
 
-      <div class="hidden-xs-only">
+      <div class="hidden-sm-and-down">
         <v-btn v-for="item in menu" :key="item.title" :to="item.url" text small rounded dark>{{ item.title }}</v-btn>
         <v-btn dark text rounded small v-if="!authenticated" @click="login">Log In</v-btn>
         <v-btn dark text rounded small v-if="authenticated" @click="logout">Log Out</v-btn>
       </div>
 
-      <div class="hidden-sm-and-up">
+      <div class="hidden-md-and-up">
       <v-menu bottom left>
         <template v-slot:activator="{ on, attrs }">
           <v-btn dark icon v-bind="attrs" v-on="on">

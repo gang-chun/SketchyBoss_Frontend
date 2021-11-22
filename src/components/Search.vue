@@ -1,6 +1,6 @@
 <template>
   <v-app class="content">
-      <v-container pa-14 fluid>
+      <v-container fluid>
         <v-row>
           <v-col cols="12" xl="12" lg="12" justify="center" align="center">
             <v-card style="padding: 20px" elevation="24" justify="center">

@@ -62,7 +62,7 @@
                 <td nowrap="true">{{ props.item.company_name }}</td>
                 <td nowrap="true">{{ formatDate(props.item.updated_date) }}</td>
                 <td><v-icon @click="updateReport(props.item)">mdi-pencil</v-icon></td>
-                <td><v-icon @click="deleteReport(props.item)">mdi-delete</v-icon></td>
+                <td><v-icon color="red lighten-1" @click="deleteReport(props.item)">mdi-delete</v-icon></td>
               </tr>
             </template>
           </v-data-table>
@@ -82,11 +82,19 @@
                 >
                   <v-card @click.native="expand(item, !isExpanded(item))">
                     <v-card-title class="pb-0 pt-0 pl-0">
-                      <v-col cols="9" class="text-left body-2 text-truncate">{{item.title}}</v-col>
-                      <v-col cols="3" class="text-center">
+                      <v-col cols="8" class="text-left body-2 text-truncate">{{item.title}}</v-col>
+                      <v-col cols="4">
                         <v-card-actions>
-                              <v-icon @click="updateReport(item)" class="small">mdi-pencil</v-icon>
-                              <v-icon @click="deleteReport(item)" class="small">mdi-delete</v-icon>
+                          <v-btn icon @click="updateReport(item)" class="small">
+                            <v-icon>
+                              mdi-pencil
+                            </v-icon>
+                          </v-btn>
+                          <v-btn icon color="red lighten-1" @click="deleteReport(item)">
+                            <v-icon>
+                              mdi-delete
+                            </v-icon>
+                          </v-btn>
                         </v-card-actions>
                       </v-col>
                     </v-card-title>
@@ -94,19 +102,22 @@
 
                     <v-list v-show="isExpanded(item)" dense>
                       <v-list-item>
-                        <v-list-item-content class="align-end">{{ item.title }}</v-list-item-content>
+                        <v-list-item-content>
+                          <v-list-item-title class="font-weight-bold">Content</v-list-item-title>
+                          <v-list-item-subtitle>{{ item.content }}</v-list-item-subtitle>
+                        </v-list-item-content>
                       </v-list-item>
                       <v-list-item>
-                        <v-list-item-content>Content:</v-list-item-content>
-                        <v-list-item-content class="align-end">{{ item.content }}</v-list-item-content>
+                        <v-list-item-content>
+                          <v-list-item-title class="font-weight-bold">Actor</v-list-item-title>
+                          <v-list-item-subtitle>{{ item.actor_name }} of {{ item.company_name }}</v-list-item-subtitle>
+                        </v-list-item-content>
                       </v-list-item>
                       <v-list-item>
-                        <v-list-item-content>Actor Information:</v-list-item-content>
-                        <v-list-item-content class="align-end">{{ item.actor_name }} from {{ item.company_name }}</v-list-item-content>
-                      </v-list-item>
-                      <v-list-item>
-                        <v-list-item-content>Last Updated:</v-list-item-content>
-                        <v-list-item-content class="align-end">{{ formatDate(item.updated_date) }}</v-list-item-content>
+                        <v-list-item-content>
+                          <v-list-item-title class="font-weight-bold">Last Updated</v-list-item-title>
+                          <v-list-item-subtitle>{{ formatDate(item.updated_date) }}</v-list-item-subtitle>
+                        </v-list-item-content>
                       </v-list-item>
                     </v-list>
                   </v-card>

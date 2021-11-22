@@ -29,7 +29,7 @@
             <v-container fluid grid-list-md>
               <v-row>
                 <v-col cols="12">
-                    <v-card-text id="intro" style="font-weight: normal; font-size: 12px;">
+                    <v-card-text style="font-weight: normal; font-size: 12px;">
                       <strong>Purpose:</strong> The purpose of this project is to build a
                       preliminary full stack application that allows people to warn other people of bad behavior in the workplace.
                       The term “whisper networks” describes the networks that have formed for women to warn other women
@@ -77,10 +77,11 @@
   }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style >
 .page {
   background-color: #4b3a41;
 }
+
 #mainCard {
   background-color: #401a19;
   opacity: 100%;
