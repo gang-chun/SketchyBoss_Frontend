@@ -2,7 +2,7 @@
   <v-main class="page">
     <v-container fluid>
       <v-row>
-        <v-col align="center" justify="center" cols="12">
+        <v-col align="center" justify="center" cols="12" id="intro">
           <blockquote>
             Welcome {{validUserName}}!
             <footer>
@@ -28,14 +28,7 @@
           <v-card class="elevation-9" id="mainCard">
             <v-container fluid grid-list-md>
               <v-row>
-                <v-col cols="6">
-                  <v-card flat color="#401a19" class="d-flex justify-center">
-                    <v-img
-                      :src="require('@/assets/images/SBLogoRedWhite.jpg')" height="320px" width="300px">
-                    </v-img>
-                  </v-card>
-                </v-col>
-                <v-col colors="6">
+                <v-col cols="12">
                     <v-card-text id="intro" style="font-weight: normal; font-size: 12px;">
                       <strong>Purpose:</strong> The purpose of this project is to build a
                       preliminary full stack application that allows people to warn other people of bad behavior in the workplace.

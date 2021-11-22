@@ -93,7 +93,7 @@ export default {
     return {
       actors: [],
       companies: [],
-      user: {},
+      username: {},
       showError: false,
       report: {},
       pageTitle: "Add New Report",
@@ -184,21 +184,6 @@ export default {
         if (error.response.status === 401) {
           router.push("/auth");
         }else if (error.response.status === 400) {
-          this.showMsg = "error";
-        }
-      });
-    },
-    getUser() {
-      apiService.getUser(this.user).then(response => {
-        if (response.status === 200) {
-          this.user = response.data;
-        } else {
-          this.showMsg = "error";
-        }
-      }).catch(error => {
-        if (error.response.status === 401) {
-          router.push("/auth");
-        } else if (error.response.status === 400) {
           this.showMsg = "error";
         }
       });

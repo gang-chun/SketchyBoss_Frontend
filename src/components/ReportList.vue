@@ -1,6 +1,6 @@
 <template>
   <v-app class="content" style="background-color: #4e3a43;">
-    <v-container pa-12>
+    <v-container fluid>
       <v-row>
         <v-col cols="12" xl="12" md="12" lg="12" align="center" justify="center">
 
@@ -29,16 +29,25 @@
           </v-col>
 
       <!------------------------- Data table ----------------------------->
-        <v-col cols="12" lg="12" md="12">
-          <v-card style="padding: 20px" elevation="24">
+        <v-col cols="12" lg="12" md="12" v-resize="onResize">
+          <v-card style="padding: 10px" elevation="24">
             <v-card-title class="justify-space-between">
-              <h2>My Reports</h2>
+              My Reports
                 <v-btn class="white--text"
                          style="background-color: #401a19;"
                          elevation="6"
-                         @click="addNewReport">New Report</v-btn>
+                         @click="addNewReport"
+                v-if="!isMobile">New Report</v-btn>
+                <v-btn class="white--text"
+                       style="background-color: #401a19; font-size: large"
+                       elevation="6"
+                       fab
+                       small
+                       @click="addNewReport"
+                       v-else><v-icon>mdi-plus</v-icon></v-btn>
             </v-card-title>
 
+          <!-- Desktop data table -->
           <v-data-table
             :headers="headers"
             :items="reports"
@@ -51,12 +60,14 @@
                 <td nowrap="true">{{ props.item.title }}</td>
                 <td nowrap="true">{{ props.item.actor_name }}</td>
                 <td nowrap="true">{{ props.item.company_name }}</td>
-                <td nowrap="true">{{ props.item.updated_date }}</td>
+                <td nowrap="true">{{ formatDate(props.item.updated_date) }}</td>
                 <td><v-icon @click="updateReport(props.item)">mdi-pencil</v-icon></td>
                 <td><v-icon @click="deleteReport(props.item)">mdi-delete</v-icon></td>
               </tr>
             </template>
           </v-data-table>
+
+          <!-- Mobile data iterator -->
           <v-data-iterator
             :items="reports"
             hide-default-footer
@@ -69,14 +80,13 @@
                   :key="item.name"
                   cols="12"
                 >
-                  <v-card>
+                  <v-card @click.native="expand(item, !isExpanded(item))">
                     <v-card-title class="pb-0 pt-0 pl-0">
-                      <v-col cols="9" class="text-left body-2 text-truncate">{{item.actor_name}} - {{item.company_name }}</v-col>
+                      <v-col cols="9" class="text-left body-2 text-truncate">{{item.title}}</v-col>
                       <v-col cols="3" class="text-center">
                         <v-card-actions>
-                          <v-icon @click="updateReport(item)" class="small">mdi-pencil</v-icon>
-                          <v-icon @click="deleteReport(item)" class="small">mdi-delete</v-icon>
-                          <v-icon @click.native="expand(item, !isExpanded(item))" class="small">mdi-dots-horizontal</v-icon>
+                              <v-icon @click="updateReport(item)" class="small">mdi-pencil</v-icon>
+                              <v-icon @click="deleteReport(item)" class="small">mdi-delete</v-icon>
                         </v-card-actions>
                       </v-col>
                     </v-card-title>
@@ -96,7 +106,7 @@
                       </v-list-item>
                       <v-list-item>
                         <v-list-item-content>Last Updated:</v-list-item-content>
-                        <v-list-item-content class="align-end">{{ item.updated_date }}</v-list-item-content>
+                        <v-list-item-content class="align-end">{{ formatDate(item.updated_date) }}</v-list-item-content>
                       </v-list-item>
                     </v-list>
                   </v-card>
@@ -116,6 +126,7 @@
 
 import router from '../router';
 import {APIService} from '../http/APIService';
+import moment from 'moment';
 const apiService = new APIService();
 
 export default {
@@ -128,9 +139,9 @@ export default {
     isMobile: false,
     headers: [
       {text: 'Title', sortable: false, align: 'left',},
-      {text: 'Reportee', sortable: false, align: 'left',},
+      {text: 'Actor', sortable: false, align: 'left',},
       {text: 'Company', sortable: false, align: 'left',},
-      {text: 'Created/Modified', sortable: false, align: 'left',},
+      {text: 'Last Updated', sortable: false, align: 'left',},
       {text: 'Update', sortable: false, align: 'left',},
       {text: 'Delete', sortable: false, align: 'left',}
 
@@ -143,13 +154,20 @@ export default {
   },
   methods: {
     onResize() {
-      this.isMobile = window.innerWidth < 600;
+      if (window.innerWidth < 600)
+        this.isMobile = true;
+      else
+        this.isMobile = false;
     },
     showMessages(){
       console.log(this.$route.params.msg)
       if (this.$route.params.msg) {
         this.showMsg = this.$route.params.msg;
       }
+    },
+    formatDate(value) {
+      return moment(value).format("MMM DD, YYYY") + ' at ' +
+        moment(value).format("hh:mma")
     },
     getReports() {
       apiService.getReportList().then(response => {
