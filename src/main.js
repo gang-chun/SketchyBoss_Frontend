@@ -7,6 +7,7 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import VueSession from 'vue-session'
 import '@mdi/font/css/materialdesignicons.css'
+import store from './store/modules'
 
 
 Vue.use(Vuetify, {
@@ -24,6 +25,7 @@ new Vue({
   vuetify : new Vuetify(),
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

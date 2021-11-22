@@ -15,6 +15,7 @@
 
 <script>
   import Settings from '../components/Settings'
+  import router from "../router";
 
 
   export default {
@@ -26,6 +27,7 @@
       return {
         currPage: 'Settings',
         msg: "Parent Method Message",
+        validUserName: '',
         items: [
           { title: 'Search', icon: 'mdi-account-search', url: '/account/search'},
           { title: 'Reports', icon: 'mdi-forum' },
@@ -34,10 +36,18 @@
 
       }
     },
-      methods: {
-      sendSearch() {
-          console.log('test')
+    mounted() {
+      this.verifyUser()
+    },
+    methods: {
+      verifyUser() {
+        if (localStorage.getItem("isAuthenticates")
+          && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {
+          this.validUserName = JSON.parse(localStorage.getItem("log_user"));
+        } else {
+          router.push("/auth");
         }
+      },
     }
   }
 </script>

@@ -2,9 +2,6 @@ import axios from 'axios';
 const API_URL = 'https://sketchyboss.herokuapp.com'
 
 export class APIService {
-  constructor() {
-
-  }
 
   getReportList() {
     const url = `${API_URL}/api/reports/`;
@@ -43,6 +40,14 @@ export class APIService {
     return axios.delete(url, {headers: headers});
   }
 
+  getCompany(companyID) {
+    const url = `${API_URL}/api/companies/${companyID}`;
+    let jwtToken = localStorage.getItem('token');
+    console.log(":::jwtToken:::::"+jwtToken);
+    const headers = {Authorization: `jwt ${jwtToken}`};
+    return axios.get(url, {headers: headers});
+  }
+
   getCompanyList() {
     const url = `${API_URL}/api/companies/`;
     let jwtToken = localStorage.getItem('token');
@@ -51,8 +56,8 @@ export class APIService {
     return axios.get(url, {headers: headers});
   }
 
-  getCompany(company) {
-    const url = `${API_URL}/api/companies/${company}`;
+  getCompanyReports(companyID) {
+    const url = `${API_URL}/api/company/reports/${companyID}`;
     let jwtToken = localStorage.getItem('token');
     console.log(":::jwtToken:::::"+jwtToken);
     const headers = {Authorization: `jwt ${jwtToken}`};

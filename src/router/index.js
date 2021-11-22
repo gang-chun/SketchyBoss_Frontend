@@ -8,6 +8,8 @@ import SearchPage from '@/components/SearchPage'
 import Forgot from "@/components/Forgot";
 import ReportList from "@/components/ReportList";
 import ReportCreate from "@/components/ReportCreate";
+import CompanyReports from "@/components/CompanyReports";
+import SearchTest from "@/components/SearchTest";
 
 Vue.use(Router)
 
@@ -15,6 +17,11 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    {
+      path: '/test',
+      name: 'SearchTest',
+      component: SearchTest
+    },
     {
       path: '/',
       name: 'Home',
@@ -51,9 +58,9 @@ export default new Router({
       component: Search,
     },
     {
-      path: '/search/:searchField/:input',
-      name: 'SearchPage',
-      component: SearchPage,
+      path: '/company/reports/:pk',
+      name: 'CompanyReports',
+      component: CompanyReports,
 
     },
     {
@@ -68,4 +75,6 @@ export default new Router({
     },
   ]
 })
+
+
 
