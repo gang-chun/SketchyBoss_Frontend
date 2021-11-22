@@ -6,17 +6,18 @@
             <v-card style="padding: 20px" elevation="24" justify="center">
               <v-card-title>Search the Sketchy Boss database...</v-card-title>
                 <v-form>
-                  <v-row class="pa-4 justify-space-between" align="center">
-                    <v-col cols="12" xl="3" lg="3" md="3" sm="3">
-                      <v-select :items="fields" v-model="searchField"></v-select>
-                    </v-col>
+                  <v-row class="pa-4" align="left">
+<!--                    <v-col cols="12" xl="3" lg="3" md="3" sm="3">-->
+<!--                      <v-select :items="fields" v-model="searchField"></v-select>-->
+<!--                    </v-col>-->
                     <v-col cols="12" xl="7" lg="7" md="7" sm="7">
                         <v-text-field
                           v-model="queryInput"
+                          label="Find the company"
                           style="color: white; padding-left: 15px"
                         ></v-text-field>
                     </v-col>
-                    <v-col cols="12" xl="2" lg="2" md="2" sm="1" class="justify-center align-self-center">
+                    <v-col cols="12" xl="2" lg="2" md="2" sm="1">
                       <v-btn id='searchBTN' elevation="8" @click="submitSearch">
                         Search
                       </v-btn>
@@ -34,7 +35,7 @@
                 v-if="!isMobile"
               >
               <template v-slot:item="props">
-                <tr>
+                <tr v-show="filterRow(props.item.name)">
                   <td nowrap="true">{{ props.item.name }}</td>
                   <td nowrap="true">{{ props.item.industry }}</td>
                   <td nowrap="true"></td>
@@ -141,7 +142,7 @@ export default {
   name: 'Search',
   data () {
     return {
-      searchField: '',
+      searchField: 'By Company',
       queryInput: '',
       fields: ['By Name', 'By Company'],
       companies: [],
@@ -179,11 +180,17 @@ export default {
           });
           }
         },
+        filterRow(company_name) {
+          let result = true;
+          let query = this.queryInput.toLowerCase();
+          let company = company_name.toLowerCase();
+          result = query.includes(company)
+          return result;
+        },
 
         findCompanyReports(company) {
           router.push("/company/reports/" + company.id)
         },
-
 
         getCompanyList() {
           this.companyTable = true;

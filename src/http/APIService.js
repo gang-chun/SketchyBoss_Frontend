@@ -40,6 +40,14 @@ export class APIService {
     return axios.delete(url, {headers: headers});
   }
 
+  getCompany(companyID) {
+    const url = `${API_URL}/api/companies/${companyID}`;
+    let jwtToken = localStorage.getItem('token');
+    console.log(":::jwtToken:::::"+jwtToken);
+    const headers = {Authorization: `jwt ${jwtToken}`};
+    return axios.get(url, {headers: headers});
+  }
+
   getCompanyList() {
     const url = `${API_URL}/api/companies/`;
     let jwtToken = localStorage.getItem('token');
