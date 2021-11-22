@@ -154,13 +154,25 @@ export default {
         {text: 'Field/Industry', sortable: false, align: 'left',},
         {text: 'Total Reports', sortable: false, align: 'left',},
         {text: '', sortable: false, align: 'left',}
-    ],
+      ],
       msg: 'This is the search component',
+      validUserName: '',
     }
   },
-      methods: {
-        submitSearch() {
-          if(this.searchField == 'By Company') {
+  mounted() {
+    this.verifyUser();
+  },
+  methods: {
+    verifyUser() {
+      if (localStorage.getItem("isAuthenticates")
+        && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {
+        this.validUserName = JSON.parse(localStorage.getItem("log_user"));
+      } else {
+        router.push("/auth");
+      }
+    },
+    submitSearch() {
+      if(this.searchField == 'By Company') {
             apiService.getCompanyList().then(response => {
             this.companies = response.data.data;
             console.log(response.data.data);
