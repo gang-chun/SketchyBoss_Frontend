@@ -17,7 +17,7 @@
           <v-col cols="12" sm="10" md="10" lg="6" class="align-center">
             <v-card class="login-card">
               <v-card-title>
-                User is {{ user }}<span class="headline">{{pageTitle}}</span>
+                <span class="headline">{{pageTitle}}</span>
               </v-card-title>
               <v-spacer/>
 

@@ -2,9 +2,6 @@ import axios from 'axios';
 const API_URL = 'http://localhost:8000' /*'https://sketchyboss.herokuapp.com' /*'https://sketchyboss.herokuapp.com';*/ /* 'http://localhost:8000' http://127.0.0.1:8000/ or  'https://movies-groyce.pythonanywhere.com/'*/
 
 export class APIService {
-  constructor() {
-
-  }
 
   getUser(user) {
     const url = `${API_URL}/api/users/${user}`;
@@ -60,8 +57,8 @@ export class APIService {
     return axios.get(url, {headers: headers});
   }
 
-  getCompany(company) {
-    const url = `${API_URL}/api/companies/${company}`;
+  getCompanyReports(companyID) {
+    const url = `${API_URL}/api/company/reports/${companyID}`;
     let jwtToken = localStorage.getItem('token');
     console.log(":::jwtToken:::::"+jwtToken);
     const headers = {Authorization: `jwt ${jwtToken}`};

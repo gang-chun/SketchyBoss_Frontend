@@ -53,6 +53,7 @@
         { title: 'Database', url: "/search"},
         { title: 'My Reports', url: '/report-list'},
         { title: 'Account', url: '/account'},
+        { title: 'Test', url: '/test'}
       ]
     }),
 
