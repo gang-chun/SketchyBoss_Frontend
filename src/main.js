@@ -8,14 +8,16 @@ import 'vuetify/dist/vuetify.min.css'
 import VueSession from 'vue-session'
 import '@mdi/font/css/materialdesignicons.css'
 import store from './store/modules'
+import VueSimpleAlert from "vue-simple-alert"
 
-
+Vue.use(VueSession)
+Vue.use(VueSimpleAlert)
 Vue.use(Vuetify, {
   icons: {
     iconfont: 'mdi'
   }
 })
-Vue.use(VueSession)
+
 
 Vue.config.productionTip = false;
 

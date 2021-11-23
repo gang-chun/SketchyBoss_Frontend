@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_URL = 'https://sketchyboss.herokuapp.com'
+const API_URL = 'http://127.0.0.1:8000'
 
 export class APIService {
 
@@ -33,7 +33,14 @@ export class APIService {
     return axios.put(url, report, {headers: headers});
   }
 
-  deleteReport(report){
+  deleteReport(){
+    const url = `${API_URL}/api/reports/`;
+    let jwtToken = localStorage.getItem('token');
+    const headers = {Authorization: `jwt ${jwtToken}`};
+    return axios.delete(url, {headers: headers});
+  }
+
+  deleteAllReports(report){
     const url = `${API_URL}/api/reports/${report}`;
     let jwtToken = localStorage.getItem('token');
     const headers = {Authorization: `jwt ${jwtToken}`};
