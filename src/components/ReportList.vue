@@ -134,7 +134,6 @@
 
 
 <script>
-
 import router from '../router';
 import {APIService} from '../http/APIService';
 import moment from 'moment';
@@ -209,19 +208,21 @@ export default {
       router.push('/report-edit/' + report.id);
     },
     deleteReport(report) {
-      apiService.deleteReport(report.id).then(response => {
-        if (response.status === 204) {
-          router.push('/report-list/deleted/')
-          this.getReports()
-        }
-      }).catch(error => {
-        if (error.response.status === 401) {
-          localStorage.removeItem('isAuthenticates');
-          localStorage.removeItem('log_user');
-          localStorage.removeItem('token');
-          router.push("/auth");
-        }
-      });
+      this.$confirm("Are you sure you want to delete this report?").then(() => {
+        apiService.deleteReport(report.id).then(response => {
+          if (response.status === 204) {
+            router.push('/report-list/deleted/')
+            this.getReports()
+          }
+        }).catch(error => {
+          if (error.response.status === 401) {
+            localStorage.removeItem('isAuthenticates');
+            localStorage.removeItem('log_user');
+            localStorage.removeItem('token');
+            router.push("/auth");
+          }
+        });
+      })
     }
   }
 };

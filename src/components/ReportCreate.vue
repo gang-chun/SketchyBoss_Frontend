@@ -53,7 +53,7 @@
                     />
 
                     <v-select
-                      v-model="report1.actor"
+                      v-model="actor"
                       label="Actor"
                       :items="actorList"
                       item-value="id"
@@ -64,7 +64,7 @@
                     <v-btn @click="addActor">Add Actor</v-btn>
 
                     <v-select
-                      v-model="report1.company"
+                      v-model="company"
                       label="Company"
                       :items="companyList"
                       item-value="id"
@@ -112,7 +112,9 @@ export default {
       pageTitle: "Add New Report",
       isUpdate: false,
       showMsg: '',
-      report1: {}
+      report1: {},
+      actor: '',
+      company: '',
     };
   },
   computed: {
@@ -165,16 +167,16 @@ export default {
       this.report1.state = document.getElementById('state_ID').value;
       //this.report1.actor = document.getElementById('actor_ID').value;
 
-      this.report1.company = document.getElementById('company_ID').item;
+      //this.report1.company = document.getElementById('company_ID').item;
       this.updateTitle(this.report1.title)
       this.updateContent(this.report1.content)
       this.updateCity(this.report1.city)
       this.updateState(this.report1.state)
 
-      let actor_det = this.actorList[this.report1.actor - 1].fName + ' ' + this.actorList[this.report1.actor - 1].lName
-      console.log(actor_det)
-      this.updateActor(actor_det.toString())
-      this.updateCompany(this.report1.company)
+      // let actor_det = this.actorList[this.report1.actor - 1].fName + ' ' + this.actorList[this.report1.actor - 1].lName
+      // console.log(actor_det)
+      // this.updateActor(actor_det.toString())
+      // this.updateCompany(this.report1.company)
       console.log(this.report1)
     },
     refreshForm() {
@@ -214,10 +216,14 @@ export default {
       });
     },
     createReport() {
+      this.updateForm()
+      this.report1.actor = this.actor
+      this.report1.company = this.company
       apiService.addNewReport(this.report1).then(response => {
         if (response.status === 201) {
-          this.report = response.data;
+          this.report1 = response.data;
           this.showMsg = "";
+          this.refreshForm()
           router.push('/report-list/');
         }else{
           this.showMsg = "error";

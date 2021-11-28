@@ -8,7 +8,7 @@
             <v-card-title>Account Settings</v-card-title>
 
           <v-card elevation="24" style="padding: 20px" class="contentCard">
-            <v-card-title><h2>Account Settings</h2></v-card-title>
+
               <v-list>
                 <v-list-item link>
                   1. Change Password

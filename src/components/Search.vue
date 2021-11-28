@@ -1,10 +1,10 @@
 <template>
   <v-app class="content">
-      <v-container fluid>
+      <v-container pa-2 fluid>
         <v-row>
           <v-col cols="12" xl="12" lg="12" justify="center" align="center">
             <v-card style="padding: 20px" elevation="24" justify="center">
-              <v-card-title>Search the Sketchy Boss database...</v-card-title>
+              <v-card-title>Search the database...</v-card-title>
                 <v-form>
                   <v-row class="pa-4" align="left">
 <!--                    <v-col cols="12" xl="3" lg="3" md="3" sm="3">-->
