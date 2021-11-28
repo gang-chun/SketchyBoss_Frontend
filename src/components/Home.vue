@@ -4,10 +4,10 @@
       <v-row>
         <v-col align="center" justify="center" cols="12" id="intro">
           <blockquote>
-            Welcome {{validUserName}}!
+            Welcome, {{validUserName}}.
             <footer>
               <small>
-                <em>&mdash; Every creeper knows a good window when they see (through) one. - Anonymous</em>
+                <em>"Every creeper knows a good window when they see [through] one." &mdash;Anonymous</em>
               </small>
             </footer>
           </blockquote>
@@ -25,11 +25,11 @@
             sm="10"
             md="8"
         >
-          <v-card class="elevation-9" id="mainCard">
-            <v-container fluid grid-list-md>
+          <v-card class="elevation-9">
+            <v-container fluid>
               <v-row>
                 <v-col cols="12">
-                    <v-card-text style="font-weight: normal; font-size: 12px;">
+                    <v-card-text>
                       <strong>Purpose:</strong> The purpose of this project is to build a
                       preliminary full stack application that allows people to warn other people of bad behavior in the workplace.
                       The term “whisper networks” describes the networks that have formed for women to warn other women
@@ -82,14 +82,9 @@
   background-color: #4b3a41;
 }
 
-#mainCard {
-  background-color: #401a19;
-  opacity: 100%;
-  color: white;
-}
-
 #intro {
   font-weight: bolder;
   font-size: 18px;
+  color: white;
 }
 </style>
