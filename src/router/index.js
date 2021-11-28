@@ -4,7 +4,6 @@ import Home from '@/components/Home'
 import Auth from '@/components/Auth'
 import Account from '@/components/Account'
 import Search from '@/components/Search'
-import SearchPage from '@/components/SearchPage'
 import Forgot from "@/components/Forgot";
 import ReportList from "@/components/ReportList";
 import ReportCreate from "@/components/ReportCreate";
@@ -12,6 +11,7 @@ import CompanyReports from "@/components/CompanyReports";
 import SearchTest from "@/components/SearchTest";
 
 Vue.use(Router)
+
 
 export default new Router({
   mode: 'history',
@@ -75,6 +75,7 @@ export default new Router({
     },
   ]
 })
+
 
 
 

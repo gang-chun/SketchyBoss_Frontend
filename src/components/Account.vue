@@ -3,9 +3,24 @@
     <v-container fluid>
       <v-row>
         <v-col cols="12">
+
           <v-card elevation="24" class="contentCard">
             <v-card-title>Account Settings</v-card-title>
-            <settings></settings>
+
+          <v-card elevation="24" style="padding: 20px" class="contentCard">
+            <v-card-title><h2>Account Settings</h2></v-card-title>
+              <v-list>
+                <v-list-item link>
+                  1. Change Password
+                </v-list-item>
+                <v-list-item link>
+                  2. Unpost and archive all reports
+                </v-list-item>
+                <v-list-item @click="deleteAllReports()">
+                  3. Permanently delete all reports
+                </v-list-item>
+              </v-list>
+          </v-card>
           </v-card>
       </v-col>
     </v-row>
@@ -14,25 +29,18 @@
 </template>
 
 <script>
-  import Settings from '../components/Settings'
   import router from "../router";
+  import {APIService} from '../http/APIService';
+  const apiService = new APIService();
 
 
   export default {
     name: 'Account',
-    components: {
-      'Settings': Settings
-    },
-    data () {
+    data() {
       return {
         currPage: 'Settings',
         msg: "Parent Method Message",
         validUserName: '',
-        items: [
-          { title: 'Search', icon: 'mdi-account-search', url: '/account/search'},
-          { title: 'Reports', icon: 'mdi-forum' },
-          { title: 'Settings', icon: 'mdi-tools' },
-        ],
 
       }
     },
@@ -48,6 +56,23 @@
           router.push("/auth");
         }
       },
+      deleteAllReports() {
+        this.$confirm("Are you sure you want to delete all reports?").then(() => {
+          apiService.deleteReport().then(response => {
+            if (response.status === 204) {
+              router.push('/account')
+              this.$alert("All reports associated with your account have been deleted.")
+            }
+          }).catch(error => {
+            if (error.response.status === 401) {
+              localStorage.removeItem('isAuthenticates');
+              localStorage.removeItem('log_user');
+              localStorage.removeItem('token');
+              router.push("/auth");
+            }
+          })
+        })
+      }
     }
   }
 </script>
