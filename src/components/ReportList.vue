@@ -206,7 +206,7 @@ export default {
       }
     },
     updateReport(report) {
-      router.push('/report-create/' + report.id);
+      router.push('/report-edit/' + report.id);
     },
     deleteReport(report) {
       apiService.deleteReport(report.id).then(response => {

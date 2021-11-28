@@ -7,6 +7,7 @@ import Search from '@/components/Search'
 import Forgot from "@/components/Forgot";
 import ReportList from "@/components/ReportList";
 import ReportCreate from "@/components/ReportCreate";
+import ReportEdit from "@/components/ReportEdit";
 import CompanyReports from "@/components/CompanyReports";
 import SearchTest from "@/components/SearchTest";
 
@@ -48,9 +49,9 @@ export default new Router({
       component: ReportCreate
     },
     {
-      path: '/report-create/:pk',
-      name: 'ReportUpdate',
-      component: ReportCreate
+      path: '/report-edit/:pk',
+      name: 'ReportEdit',
+      component: ReportEdit
     },
     {
       path: '/search',
