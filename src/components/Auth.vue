@@ -55,10 +55,13 @@
                   @click:append="showPassword = ! showPassword"
                 />
 
-              </v-container>
 
-              <v-btn small :disabled="!valid" @click="login()" class="btn">Login</v-btn>
-              <v-btn small @click="passwordReset()" class="btn">Password Reset</v-btn>
+
+              <v-btn color="success" block small :disabled="!valid" @click="login()" class="btn login">Login</v-btn>
+                <v-btn color="error" small @click="passwordReset()" class="btn">Password Reset</v-btn>
+                <v-btn small :to="{name:'Register'}" class="btn register">Register</v-btn>
+
+              </v-container>
             </v-form>
           </v-card-text>
         </v-card>
@@ -79,14 +82,14 @@
 </template>
 
 <script>
-
+  import router from "../router";
   import {APIService} from '../http/APIService';
   const apiService = new APIService();
 
   export default {
     name: 'Auth',
-
     data: () => ({
+
       credentials: {},
       passwordResetContain: false,
       emailReset: '',
@@ -111,6 +114,9 @@
       passwordReset() {
         window.location = '/auth/forgot'
       },
+      register(){
+        console.log("router")
+      },
       login() {
         // checking if the input is valid
         if (this.$refs.form.validate()) {
@@ -119,7 +125,7 @@
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('isAuthenticates', JSON.stringify(true));
             localStorage.setItem('log_user', JSON.stringify(this.credentials.username));
-            //router.push("/");
+            router.push("/");
             //router.go(-1);
              window.location = "/"
           }).catch(e => {
@@ -142,5 +148,14 @@
 .btn {
   background-color: #401a19;
   color: white;
+  padding-top: 10px;
+}
+
+.btn.login {
+  margin-bottom: 10px;
+}
+
+.register{
+  float: right;
 }
 </style>

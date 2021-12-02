@@ -9,7 +9,7 @@ import ReportList from "@/components/ReportList";
 import ReportCreate from "@/components/ReportCreate";
 import ReportEdit from "@/components/ReportEdit";
 import CompanyReports from "@/components/CompanyReports";
-import SearchTest from "@/components/SearchTest";
+import Register from "@/components/Register";
 
 Vue.use(Router)
 
@@ -18,11 +18,6 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    {
-      path: '/test',
-      name: 'SearchTest',
-      component: SearchTest
-    },
     {
       path: '/',
       name: 'Home',
@@ -73,6 +68,11 @@ export default new Router({
       path: '/auth/forgot',
       name: 'Forgot',
       component: Forgot
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     },
   ]
 })

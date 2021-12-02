@@ -132,5 +132,14 @@ export class APIService {
     const url = `${API_URL}/auth/`;
     return axios.post(url, credentials);
   }
+
+  registerUser(data){
+    const url = `${API_URL}/api/rest-auth/registration`;
+    //let jwtToken = document.cookie.valueOf('csrftoken');
+    const headers = ({"x-requested-with" : 'XMLHttpRequest'});
+    //const headers = {csrfmiddlewaretoken: `${jwtToken}` };
+    //const headers = ({Authentication : 'XMLHttpRequest'});
+    return axios.post(url, data, {headers: headers});
+  }
 }
 

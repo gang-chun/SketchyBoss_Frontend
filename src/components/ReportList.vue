@@ -156,7 +156,6 @@ export default {
       {text: 'Delete', sortable: false, align: 'left',}
 
     ],
-
   }),
   mounted() {
     this.getReports();
