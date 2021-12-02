@@ -172,7 +172,7 @@ export default {
       }
     },
     submitSearch() {
-      if(this.searchField == 'By Company') {
+      if(this.searchField === 'By Company') {
             apiService.getCompanyList().then(response => {
             this.companies = response.data.data;
             console.log(response.data.data);
