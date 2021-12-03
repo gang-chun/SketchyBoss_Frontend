@@ -11,7 +11,7 @@
 
 
                  <v-text-field
-                      v-model="userData.email"
+                      v-model="userData.account_emailaddress"
                       label="email"
                       required
                       type="email"
