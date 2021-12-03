@@ -5,7 +5,6 @@
         <v-col cols="12" xl="12" md="12" lg="12" align="center" justify="center">
 
           <!----- Alert if reports have been updated/created/deleted ----->
-          <div v-show="showMsg ==='new'">
               <v-alert v-if="showMsg === 'new'"
                        dismissible
                        :value="true"
@@ -13,19 +12,20 @@
               >
                 New report has been created.
               </v-alert>
-              <v-alert v-if="showMsg === 'update'" dismissible
+              <v-alert v-if="showMsg === 'update'"
+                       dismissible
                        :value="true"
                        type="success"
               >
                 Report information has been updated.
               </v-alert>
-              <v-alert v-if="showMsg === 'deleted'" dismissible
+              <v-alert v-if="showMsg === 'deleted'"
+                       dismissible
                        :value="true"
                        type="success"
               >
-                Selected Report has been deleted.
+                Selected report has been deleted.
               </v-alert>
-            </div>
           </v-col>
 
       <!------------------------- Data table ----------------------------->

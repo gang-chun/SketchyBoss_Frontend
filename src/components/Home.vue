@@ -64,9 +64,6 @@
       this.getUser();
     },
     methods: {
-      viewReports() {
-        router.push('/report-list');
-      },
       getUser() {
         if (localStorage.getItem("isAuthenticates")
           && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {

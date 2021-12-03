@@ -1,3 +1,5 @@
+<!-- CURRENTLY UN-USED -->
+
 <template>
   <v-container grid-list-md>
     <v-row align="center" justify="center">
@@ -25,68 +27,56 @@
                 <v-form ref="form" lazy-validation>
                   <v-container>
                     <v-text-field
-                      v-model="title"
+                      v-model="report.title"
                       label="Title"
                       required
-                      id="title_ID"
                     />
 
                     <v-text-field
-                      v-model="content"
+                      v-model="report.content"
                       label="Content"
                       required
-                      id="content_ID"
                     />
 
                     <v-text-field
-                      v-model="city"
+                      v-model="report.city"
                       label="City"
                       required
-                      id="city_ID"
                     />
 
                     <v-text-field
-                      v-model="state"
+                      v-model="report.state"
                       label="State"
                       required
-                      id="state_ID"
                     />
 
                     <v-select
-                      v-model="actor"
+                      v-model="report.actor"
                       label="Actor"
                       :items="actorList"
                       item-value="id"
                       :item-text="item => item.fName + ' ' + item.lName"
                       required
-                      id="actor_ID"
                     ></v-select>
-                    <v-btn @click="addActor">Add Actor</v-btn>
 
                     <v-select
-                      v-model="company"
+                      v-model="report.company"
                       label="Company"
                       :items="companyList"
                       item-value="id"
                       item-text="name"
                       required
-                      id="company_ID"
                     ></v-select>
-                    <v-btn @click="addCompany">Add Company</v-btn>
 
                   </v-container>
-                  <v-btn v-if="!isUpdate" class="blue white--text" @click="createReport">Save</v-btn>
-                  <v-btn v-if="isUpdate" class="blue white--text" @click="updateReport">Update</v-btn>
+
+                  <v-btn class="blue white--text" @click="updateReport">Update</v-btn>
                   <v-btn class="white black--text" @click="cancelOperation">Cancel</v-btn>
                 </v-form>
               </v-card-text>
             </v-card>
           </v-col>
         </v-row>
-<!--        <div class="report">-->
-<!--          <h2>Test</h2>-->
-<!--            <div v-for="(item, index) in report1" :key="index">{{item}}</div>-->
-<!--        </div>-->
       </v-col>
     </v-row>
   </v-container>
@@ -94,11 +84,9 @@
 
 
 <script>
-import { mapState, mapGetters, mapActions }  from 'vuex';
 import router from '../router';
 import {APIService} from '../http/APIService';
 const apiService = new APIService();
-
 export default {
   name: 'ReportCreate',
   components: {},
@@ -110,21 +98,10 @@ export default {
       showError: false,
       report: {},
       pageTitle: "Add New Report",
-      isUpdate: false,
       showMsg: '',
-      report1: {},
-      actor: '',
-      company: '',
     };
   },
-  computed: {
-    ...mapGetters({
-      title: 'reportTitle',
-      content: 'reportContent',
-      city: 'reportCity',
-      state: 'reportState'
-    }),
-
+  computed:{
     actorList:{
       get () {
         return this.actors
@@ -142,58 +119,7 @@ export default {
       }
     }
   },
-  created(){
-  },
   methods: {
-    ...mapActions(['updateTitle']),
-    ...mapActions(['updateContent']),
-    ...mapActions(['updateCity']),
-    ...mapActions(['updateState']),
-    ...mapActions(['updateActor']),
-    ...mapActions(['updateCompany']),
-    ...mapActions(['refreshState']),
-    addActor() {
-      this.updateForm()
-      if (localStorage.getItem("isAuthenticates")
-        && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {
-        router.push('/actor-create');
-      } else {
-        router.push("/auth");
-      }
-    },
-    addCompany() {
-      this.updateForm()
-      if (localStorage.getItem("isAuthenticates")
-        && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {
-        router.push('/company-create');
-      } else {
-        router.push("/auth");
-      }
-    },
-    updateForm() {
-      this.report1.title = document.getElementById('title_ID').value;
-      this.report1.content = document.getElementById('content_ID').value;
-      this.report1.city = document.getElementById('city_ID').value;
-      this.report1.state = document.getElementById('state_ID').value;
-      this.report1.actor = document.getElementById('actor_ID').value;
-      this.report1.company = document.getElementById('company_ID').item;
-      this.updateTitle(this.report1.title)
-      this.updateContent(this.report1.content)
-      this.updateCity(this.report1.city)
-      this.updateState(this.report1.state)
-      this.updateActor(this.report1.actor)
-      this.updateCompany(this.report1.company)
-
-      // let actor_det = this.actorList[this.report1.actor - 1].fName + ' ' + this.actorList[this.report1.actor - 1].lName
-      // console.log(actor_det)
-      // this.updateActor(actor_det.toString())
-      // this.updateCompany(this.report1.company)
-      console.log(this.report1)
-    },
-    refreshForm() {
-      this.refreshState()
-    },
-
     getActors() {
       apiService.getActorList().then(response => {
         this.actors = response.data.data;
@@ -226,29 +152,7 @@ export default {
         }
       });
     },
-    createReport() {
-      this.updateForm()
-      this.report1.actor = this.actor
-      this.report1.company = this.company
-      apiService.addNewReport(this.report1).then(response => {
-        if (response.status === 201) {
-          this.report1 = response.data;
-          this.showMsg = "";
-          this.refreshForm()
-          router.push('/report-list/new');
-        }else{
-          this.showMsg = "error";
-        }
-      }).catch(error => {
-        if (error.response.status === 401) {
-          router.push("/auth");
-        }else if (error.response.status === 400) {
-          this.showMsg = "error";
-        }
-      });
-    },
     cancelOperation(){
-      this.refreshForm()
       router.push("/report-list");
     },
     updateReport() {

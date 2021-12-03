@@ -10,6 +10,10 @@ import ReportCreate from "@/components/ReportCreate";
 import ReportEdit from "@/components/ReportEdit";
 import CompanyReports from "@/components/CompanyReports";
 import Register from "@/components/Register";
+import ActorCreate from "../components/ActorCreate";
+import CompanyCreate from "../components/CompanyCreate";
+import ActorEdit from "../components/ActorEdit";
+import CompanyEdit from "../components/CompanyEdit";
 
 Vue.use(Router)
 
@@ -47,6 +51,26 @@ export default new Router({
       path: '/report-edit/:pk',
       name: 'ReportEdit',
       component: ReportEdit
+    },
+    {
+      path: '/actor-create',
+      name: 'ActorCreate',
+      component: ActorCreate
+    },
+    {
+      path: '/actor-edit/:pk',
+      name: 'ActorEdit',
+      component: ActorEdit
+    },
+    {
+      path: '/company-create',
+      name: 'CompanyCreate',
+      component: CompanyCreate
+    },
+    {
+      path: '/company-edit/:pk',
+      name: 'CompanyEdit',
+      component: CompanyEdit
     },
     {
       path: '/search',
