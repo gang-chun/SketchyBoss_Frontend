@@ -1,5 +1,5 @@
 <template>
-  <v-app class="content">
+  <v-app class="content" style="background-color: #4e3a43;">
       <v-container pa-2 fluid>
         <v-row>
           <v-col cols="12" xl="12" lg="12" justify="center" align="center">

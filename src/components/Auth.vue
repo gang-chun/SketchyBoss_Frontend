@@ -58,8 +58,8 @@
 
 
               <v-btn color="success" block small :disabled="!valid" @click="login()" class="btn login">Login</v-btn>
-                <v-btn color="error" small @click="passwordReset()" class="btn">Password Reset</v-btn>
-                <v-btn small :to="{name:'Register'}" class="btn register">Register</v-btn>
+                <v-btn color="error" block small @click="passwordReset()" class="btn">Password Reset</v-btn>
+                <v-btn block small :to="{name:'Register'}" class="btn">Register</v-btn>
 
               </v-container>
             </v-form>
@@ -146,16 +146,8 @@
 
 
 .btn {
-  background-color: #401a19;
   color: white;
-  padding-top: 10px;
+  margin-top: 10px;
 }
 
-.btn.login {
-  margin-bottom: 10px;
-}
-
-.register{
-  float: right;
-}
 </style>
