@@ -33,15 +33,15 @@ export class APIService {
     return axios.put(url, report, {headers: headers});
   }
 
-  deleteReport(){
-    const url = `${API_URL}/api/reports/`;
+  deleteReport(report_id){
+    const url = `${API_URL}/api/reports/${report_id}`;
     let jwtToken = localStorage.getItem('token');
     const headers = {Authorization: `jwt ${jwtToken}`};
     return axios.delete(url, {headers: headers});
   }
 
-  deleteAllReports(report){
-    const url = `${API_URL}/api/reports/${report}`;
+  deleteAllReports(){
+    const url = `${API_URL}/api/reports/`;
     let jwtToken = localStorage.getItem('token');
     const headers = {Authorization: `jwt ${jwtToken}`};
     return axios.delete(url, {headers: headers});

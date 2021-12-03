@@ -58,7 +58,7 @@
       },
       deleteAllReports() {
         this.$confirm("Are you sure you want to delete all reports?").then(() => {
-          apiService.deleteReport().then(response => {
+          apiService.deleteAllReports().then(response => {
             if (response.status === 204) {
               router.push('/account')
               this.$alert("All reports associated with your account have been deleted.")
