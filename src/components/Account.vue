@@ -1,26 +1,21 @@
 <template>
-  <v-app class="content" style="background-color: #4e3a43">
-    <v-container fluid>
+  <v-app style="background-color: #4e3a43">
+    <v-container>
       <v-row>
-        <v-col cols="12">
-
-          <v-card elevation="24" class="contentCard">
+        <v-col align="center" justify="center">
+          <v-card elevation="6">
             <v-card-title>Account Settings</v-card-title>
-
-          <v-card elevation="24" style="padding: 20px" class="contentCard">
-
               <v-list>
                 <v-list-item link>
-                  1. Change Password
+                    1. Change Password
                 </v-list-item>
                 <v-list-item link>
-                  2. Unpost and archive all reports
+                    2. Unpost and archive all reports
                 </v-list-item>
                 <v-list-item @click="deleteAllReports()">
-                  3. Permanently delete all reports
+                    3. Permanently delete all reports
                 </v-list-item>
               </v-list>
-          </v-card>
           </v-card>
       </v-col>
     </v-row>

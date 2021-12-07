@@ -9,7 +9,7 @@
                      :value="true"
                      type="error"
             >
-              Please verify company information.
+              Please verify organization information.
             </v-alert>
           </v-col>
         </v-row>
@@ -26,8 +26,9 @@
                   <v-container>
                     <v-text-field
                       v-model="company.name"
-                      label="Company Name"
+                      label="Organization Name"
                       required
+                      color="#401a19"
                       id="name_id"
                     />
 
@@ -35,12 +36,35 @@
                       v-model="company.industry"
                       label="Industry"
                       required
+                      color="#401a19"
                       id="industry_id"
                     />
+
+                    <v-row>
+                      <v-col cols="6">
+
+                        <v-btn
+                          v-if="!isUpdate"
+                          class="white--text"
+                          block
+                          color="#401a19"
+                          @click="createCompany">Save</v-btn>
+                        <v-btn
+                          v-if="isUpdate"
+                          class="white--text"
+                          block
+                          color="#401a19"
+                          @click="updateCompany">Update</v-btn>
+                      </v-col>
+                      <v-col cols="6">
+                        <v-btn
+                          @click="cancelOperation"
+                          block
+                          outlined
+                          color="#401a19">Cancel</v-btn>
+                      </v-col>
+                    </v-row>
                   </v-container>
-                  <v-btn v-if="!isUpdate" class="blue white--text" @click="createCompany">Save</v-btn>
-                  <v-btn v-if="isUpdate" class="blue white--text" @click="updateCompany">Update</v-btn>
-                  <v-btn class="white black--text" @click="cancelOperation">Cancel</v-btn>
                 </v-form>
               </v-card-text>
             </v-card>
@@ -58,13 +82,13 @@ import {APIService} from '../http/APIService';
 const apiService = new APIService();
 
 export default {
-  name: 'CompanyCreate',
+  name: 'OrgCreate',
   components: {},
   data() {
     return {
       username: {},
       showError: false,
-      pageTitle: "Add New Company",
+      pageTitle: "Add New Organization",
       isUpdate: false,
       showMsg: '',
       company: {},
@@ -112,7 +136,7 @@ export default {
   },
   mounted() {
     if (this.$route.params.pk) {
-      this.pageTitle = "Edit Company";
+      this.pageTitle = "Edit Organization";
       this.isUpdate = true;
       apiService.getCompany(this.$route.params.pk).then(response => {
         this.company = response.data;

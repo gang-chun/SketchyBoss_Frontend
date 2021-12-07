@@ -1,26 +1,34 @@
 <template>
-  <v-app class="content" style="background-color: #4e3a43;">
-      <v-container pa-2 fluid>
+  <v-app style="background-color: #4e3a43;">
+      <v-container v-resize="onResize">
         <v-row>
-          <v-col cols="12" xl="12" lg="12" justify="center" align="center">
-            <v-card style="padding: 20px" elevation="24" justify="center">
-              <v-card-title>Search the database...</v-card-title>
+          <v-col justify="center">
+            <v-card class="pa-2" elevation="6" justify="center">
+              <v-card-title>Report Finder</v-card-title>
                 <v-form>
-                  <v-row class="pa-4" align="left">
-<!--                    <v-col cols="12" xl="3" lg="3" md="3" sm="3">-->
-<!--                      <v-select :items="fields" v-model="searchField"></v-select>-->
-<!--                    </v-col>-->
-                    <v-col cols="12" xl="7" lg="7" md="7" sm="7">
+                  <v-row class="mx-auto">
+                    <v-col cols="9">
                         <v-text-field
                           v-model="queryInput"
-                          label="Find the company"
-                          style="color: white; padding-left: 15px"
+                          label="Search by organization"
+                          color="#401a19"
                         ></v-text-field>
                     </v-col>
-                    <v-col cols="12" xl="2" lg="2" md="2" sm="1">
-                      <v-btn id='searchBTN' elevation="8" @click="submitSearch">
-                        Search
-                      </v-btn>
+                    <v-col cols="3">
+                      <v-btn
+                        elevation="2"
+                        v-if="!isMobile"
+                        @click="submitSearch"
+                        color="#401a19"
+                        class="white--text">Search</v-btn>
+                      <v-btn
+                        elevation="2"
+                        v-else
+                        fab
+                        small
+                        @click="submitSearch"
+                        color="#401a19"
+                        class="white--text"><v-icon>mdi-magnify</v-icon></v-btn>
                     </v-col>
                   </v-row>
                 </v-form>
@@ -32,21 +40,24 @@
                 :items="companies"
                 class="elevation-1"
                 style="max-height: 300px; overflow-y: auto"
-                v-if="!isMobile"
-              >
+
+              > <!-- Add v-if="!isMobile" above if mobile alternative is needed -->
               <template v-slot:item="props">
                 <tr v-show="filterRow(props.item.name)">
                   <td nowrap="true">{{ props.item.name }}</td>
                   <td nowrap="true">{{ props.item.industry }}</td>
                   <td nowrap="true"></td>
-                  <td><v-btn @click="findCompanyReports(props.item)">See reports</v-btn></td>
+                  <td><v-btn
+                    @click="findCompanyReports(props.item)"
+                    color="#401a19"
+                    outlined>See reports</v-btn></td>
                 </tr>
               </template>
               </v-data-table>
               <!-------------- End of Company Table ----------------------->
 
               <!-------------- Start of Actors Table ----------------------->
-              <v-data-iterator
+              <!-- <v-data-iterator
                 :items="reports"
                 hide-default-footer
                 v-else
@@ -92,7 +103,7 @@
                 </v-col>
               </v-row>
             </template>
-          </v-data-iterator>
+          </v-data-iterator>                       Also add this back in for above statement -->
             </v-card>
           </v-col>
         </v-row>
@@ -148,12 +159,13 @@ export default {
       companies: [],
       companySize: 0,
       companyTable: true,
+      isMobile: false,
       companyHeads: ['company'],
       companyHeaders: [
-        {text: 'Company', sortable: false, align: 'left',},
-        {text: 'Field/Industry', sortable: false, align: 'left',},
-        {text: 'Total Reports', sortable: false, align: 'left',},
-        {text: '', sortable: false, align: 'left',}
+        {text: 'Organization', sortable: false, align: 'start',},
+        {text: 'Category', sortable: false, align: 'start',},
+        {text: 'Total Reports', sortable: false, align: 'start',},
+        {text: '', sortable: false, align: 'start',}
       ],
       msg: 'This is the search component',
       validUserName: '',
@@ -163,6 +175,9 @@ export default {
     this.verifyUser();
   },
   methods: {
+    onResize() {
+      this.isMobile = window.innerWidth < 600;
+    },
     verifyUser() {
       if (localStorage.getItem("isAuthenticates")
         && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {
@@ -230,17 +245,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.content {
-  display: flex;
-  justify-content: flex-start;
-  padding: 0;
-  margin: 0;
-  background-color: #4e3a43;
-}
-
-#searchBTN {
-  font-weight: bolder;
-  color: white;
-  background-color: #401a19;
-}
 </style>

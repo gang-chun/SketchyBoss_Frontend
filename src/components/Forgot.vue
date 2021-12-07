@@ -3,8 +3,8 @@
     <v-row align="center">
       <v-col>
         <v-card>
-          <v-card-title>Password Reset</v-card-title>
-          <v-card-subtitle>Enter the e-mail associated with your account to receive password reset instructions.</v-card-subtitle>
+          <v-card-title>Password Change</v-card-title>
+          <v-card-subtitle>Enter the e-mail associated with your account to receive password change instructions.</v-card-subtitle>
 
           <v-card-text>
             <v-form
@@ -15,13 +15,14 @@
               <v-text-field
                 v-model="email"
                 :rules="emailRules"
+                color="#401a19"
                 label="Email"
                 required></v-text-field>
 
               <v-btn
                 :disabled="!valid"
-                color="success"
-                class="mr-4"
+                color="#401a19"
+                class="white--text"
                 @click="send_password_reset">
                 Submit
               </v-btn>

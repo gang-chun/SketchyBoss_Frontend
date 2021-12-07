@@ -1,12 +1,12 @@
 <template>
-  <v-container>
-    <v-row align="center" justify="center">
+  <v-container fluid>
+    <v-row justify="center">
       <v-col cols="12" sm="6" md="4" lg="4">
         <v-card class="mx-auto elevation-6">
           <v-card-title>
             <span class="headline">Login</span>
           </v-card-title>
-          <v-alert v-if="showMsg === 'error'"
+          <v-alert v-show="showMsg === 'error'"
               dismissible
               close-icon="mdi-close-circle"
               :value="true"
@@ -14,37 +14,29 @@
               icon="mdi-alert"
               dense
           >
-            Invalid username or password. Please Try again.
+            Invalid username or password. Please try again.
           </v-alert>
           <v-spacer/>
           <v-card-text>
-            <v-row
-              align="center"
-              justify="center"
-              v-if="loading"
-            >
-              <v-progress-circular
-                :size="50"
-                color="primary"
-                indeterminate
-              />
-            </v-row>
-            <v-form v-else ref="form" v-model="valid" lazy-validation>
+            <v-form ref="form" v-model="valid" lazy-validation>
               <v-container>
                 <v-text-field
                   v-model="credentials.username"
                   :counter="70"
+                  color="#401a19"
+                  :disabled="loading"
                   label="Username"
                   :rules="rules.username"
                   maxlength="70"
                   required
                   prepend-icon="mdi-account-circle"
                 />
-
                 <v-text-field
                   :type="showPassword ? 'text' : 'Password'"
                   v-model="credentials.password"
+                  color="#401a19"
                   :counter="20"
+                  :disabled="loading"
                   label="Password"
                   :rules="rules.password"
                   maxlength="20"
@@ -54,13 +46,32 @@
                   :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                   @click:append="showPassword = ! showPassword"
                 />
-
-
-
-              <v-btn color="success" block small :disabled="!valid" @click="login()" class="btn login">Login</v-btn>
-                <v-btn color="error" block small @click="passwordReset()" class="btn">Password Reset</v-btn>
-                <v-btn block small :to="{name:'Register'}" class="btn">Register</v-btn>
-
+                <v-row>
+                  <v-col cols="6">
+                    <v-btn
+                      color="#401a19"
+                      block
+                      :disabled="!valid"
+                      :loading="loading"
+                      @click="login()"
+                      class="btn white--text">Login</v-btn>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-btn
+                      block
+                      outlined
+                      color="#401a19"
+                      :to="{name:'Register'}"
+                      class="btn">Register</v-btn>
+                  </v-col>
+                </v-row>
+                <v-btn
+                  color="red darken-3"
+                  plain
+                  block
+                  small
+                  @click="passwordReset()"
+                  class="btn pt-2">Password Reset</v-btn>
               </v-container>
             </v-form>
           </v-card-text>

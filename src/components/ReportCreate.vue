@@ -1,15 +1,16 @@
 <template>
-  <v-container grid-list-md>
+  <v-container>
     <v-row align="center" justify="center">
       <v-col class="align-center">
         <v-row class="align-center" justify="center">
           <v-col cols="12" sm="10" md="10" lg="6" class="align-center">
-            <v-alert v-if="showMsg === 'error'"
+            <v-alert v-show="showMsg === 'error'"
                      dismissible
                      :value="true"
                      type="error"
+                     transition="scroll-y-transition"
             >
-              Please verify Report information.
+              Please verify report information.
             </v-alert>
           </v-col>
         </v-row>
@@ -27,6 +28,7 @@
                     <v-text-field
                       v-model="title"
                       label="Title"
+                      color="#401a19"
                       required
                       id="title_ID"
                     />
@@ -34,6 +36,7 @@
                     <v-text-field
                       v-model="content"
                       label="Content"
+                      color="#401a19"
                       required
                       id="content_ID"
                     />
@@ -41,6 +44,7 @@
                     <v-text-field
                       v-model="city"
                       label="City"
+                      color="#401a19"
                       required
                       id="city_ID"
                     />
@@ -48,36 +52,83 @@
                     <v-text-field
                       v-model="state"
                       label="State"
+                      color="#401a19"
                       required
                       id="state_ID"
                     />
 
-                    <v-select
-                      v-model="actor"
-                      label="Actor"
-                      :items="actorList"
-                      item-value="id"
-                      :item-text="item => item.fName + ' ' + item.lName"
-                      required
-                      id="actor_ID"
-                    ></v-select>
-                    <v-btn @click="addActor">Add Actor</v-btn>
+                    <v-row>
+                      <v-col cols="10">
+                        <v-select
+                          v-model="actor"
+                          label="Actor"
+                          color="#401a19"
+                          :items="actorList"
+                          item-value="id"
+                          :item-text="item => item.fName + ' ' + item.lName"
+                          required
+                          id="actor_ID"
+                        ></v-select>
+                      </v-col>
+                      <v-col cols="2" align-self="center">
+                        <v-btn class="white--text"
+                               style="background-color: #401a19"
+                               elevation="6"
+                               fab
+                               x-small
+                               @click="addActor"
+                        ><v-icon>mdi-plus</v-icon></v-btn>
+                      </v-col>
+                    </v-row>
 
-                    <v-select
-                      v-model="company"
-                      label="Company"
-                      :items="companyList"
-                      item-value="id"
-                      item-text="name"
-                      required
-                      id="company_ID"
-                    ></v-select>
-                    <v-btn @click="addCompany">Add Company</v-btn>
+                    <v-row>
+                      <v-col cols="10">
+                        <v-select
+                          v-model="company"
+                          color="#401a19"
+                          label="Organization"
+                          :items="companyList"
+                          item-value="id"
+                          item-text="name"
+                          required
+                          id="org_ID"
+                        ></v-select>
+                      </v-col>
+                      <v-col cols="2" align-self="center">
+                        <v-btn class="white--text"
+                               style="background-color: #401a19"
+                               elevation="6"
+                               fab
+                               x-small
+                               @click="addCompany"
+                        ><v-icon>mdi-plus</v-icon></v-btn>
+                      </v-col>
+                    </v-row>
 
+                    <v-row>
+                      <v-col cols="6">
+                        <v-btn
+                          v-if="!isUpdate"
+                          color="#401a19"
+                          block
+                          class="white--text"
+                          @click="createReport">Save</v-btn>
+                        <v-btn
+                          v-if="isUpdate"
+                          color="#401a19"
+                          class="white--text"
+                          block
+                          @click="updateReport">Update</v-btn>
+                      </v-col>
+                      <v-col cols="6">
+                        <v-btn
+                          outlined
+                          block
+                          color="#401a19"
+                          @click="cancelOperation">Cancel</v-btn>
+                      </v-col>
+                    </v-row>
                   </v-container>
-                  <v-btn v-if="!isUpdate" class="blue white--text" @click="createReport">Save</v-btn>
-                  <v-btn v-if="isUpdate" class="blue white--text" @click="updateReport">Update</v-btn>
-                  <v-btn class="white black--text" @click="cancelOperation">Cancel</v-btn>
                 </v-form>
               </v-card-text>
             </v-card>
@@ -165,7 +216,7 @@ export default {
       this.updateForm()
       if (localStorage.getItem("isAuthenticates")
         && JSON.parse(localStorage.getItem("isAuthenticates")) === true) {
-        router.push('/company-create');
+        router.push('/org-create');
       } else {
         router.push("/auth");
       }
@@ -176,7 +227,7 @@ export default {
       this.report1.city = document.getElementById('city_ID').value;
       this.report1.state = document.getElementById('state_ID').value;
       this.report1.actor = document.getElementById('actor_ID').value;
-      this.report1.company = document.getElementById('company_ID').item;
+      this.report1.company = document.getElementById('org_ID').item;
       this.updateTitle(this.report1.title)
       this.updateContent(this.report1.content)
       this.updateCity(this.report1.city)

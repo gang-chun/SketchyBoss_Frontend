@@ -9,7 +9,7 @@
                      :value="true"
                      type="error"
             >
-              Please verify Report information.
+              Please verify report information.
             </v-alert>
           </v-col>
         </v-row>
@@ -28,24 +28,28 @@
                       v-model="report.title"
                       label="Title"
                       required
+                      color="#401a19"
                     />
 
                     <v-text-field
                       v-model="report.content"
                       label="Content"
                       required
+                      color="#401a19"
                     />
 
                     <v-text-field
                       v-model="report.city"
                       label="City"
                       required
+                      color="#401a19"
                     />
 
                     <v-text-field
                       v-model="report.state"
                       label="State"
                       required
+                      color="#401a19"
                     />
 
                     <v-select
@@ -55,21 +59,37 @@
                       item-value="id"
                       :item-text="item => item.fName + ' ' + item.lName"
                       required
+                      color="#401a19"
                     ></v-select>
 
                     <v-select
                       v-model="report.company"
-                      label="Company"
+                      label="Organization"
                       :items="companyList"
                       item-value="id"
                       item-text="name"
                       required
+                      color="#401a19"
                     ></v-select>
 
+                    <v-row>
+                      <v-col cols="6">
+                        <v-btn
+                          class="white--text"
+                          block
+                          color="#401a19"
+                          @click="updateReport">Update</v-btn>
+                      </v-col>
+                      <v-col cols="6">
+                        <v-btn
+                          block
+                          outlined
+                          color="#401a19"
+                          @click="cancelOperation">Cancel</v-btn>
+                      </v-col>
+                    </v-row>
                   </v-container>
 
-                  <v-btn class="blue white--text" @click="updateReport">Update</v-btn>
-                  <v-btn class="white black--text" @click="cancelOperation">Cancel</v-btn>
                 </v-form>
               </v-card-text>
             </v-card>

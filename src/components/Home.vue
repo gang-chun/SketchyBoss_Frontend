@@ -40,8 +40,8 @@
                       <strong>Users:</strong> The most common type of user for this app will be women,
                       but will not exclude men as they can face abuse/harrassment in the workplace as well.
                       Users will be able to post reports, edit their own reports and unpublish or completely delete their reports.
-                      They will also be able to look up different companies to review
-                      whether or not there have been any reports about bad actors made within this company.
+                      They will also be able to look up different organizations to review
+                      whether or not there have been any reports about bad actors made within.
                     </v-card-text>
                 </v-col>
 

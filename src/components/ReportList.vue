@@ -1,76 +1,89 @@
+<!--suppress HtmlUnknownAttribute -->
 <template>
-  <v-app class="content" style="background-color: #4e3a43;">
-    <v-container fluid>
+  <v-app style="background-color: #4e3a43;">
+    <v-container v-resize="onResize">
       <v-row>
-        <v-col cols="12" xl="12" md="12" lg="12" align="center" justify="center">
-
+        <v-col>
           <!----- Alert if reports have been updated/created/deleted ----->
-              <v-alert v-if="showMsg === 'new'"
+              <v-alert v-show="showMsg === 'new'"
                        dismissible
                        :value="true"
                        type="success"
               >
                 New report has been created.
               </v-alert>
-              <v-alert v-if="showMsg === 'update'"
+              <v-alert v-show="showMsg === 'update'"
                        dismissible
                        :value="true"
                        type="success"
               >
                 Report information has been updated.
               </v-alert>
-              <v-alert v-if="showMsg === 'deleted'"
+              <v-alert v-show="showMsg === 'deleted'"
                        dismissible
                        :value="true"
                        type="success"
               >
                 Selected report has been deleted.
               </v-alert>
-          </v-col>
 
-      <!------------------------- Data table ----------------------------->
-        <v-col cols="12" lg="12" md="12" v-resize="onResize">
-          <v-card style="padding: 10px" elevation="24">
+      <!------------------------- Card Title / Add Report ----------------------------->
+          <v-card class="pa-2" elevation="6">
             <v-card-title class="justify-space-between">
               My Reports
                 <v-btn class="white--text"
-                         style="background-color: #401a19;"
-                         elevation="6"
-                         @click="addNewReport"
-                v-if="!isMobile">New Report</v-btn>
+                       style="background-color: #401a19;"
+                       elevation="2"
+                       @click="addNewReport"
+                       v-if="!isMobile">New Report</v-btn>
                 <v-btn class="white--text"
-                       style="background-color: #401a19; font-size: large"
-                       elevation="6"
+                       color="#401a19"
+                       elevation="2"
                        fab
                        small
                        @click="addNewReport"
                        v-else><v-icon>mdi-plus</v-icon></v-btn>
             </v-card-title>
 
-          <!-- Desktop data table -->
-          <v-data-table
-            :headers="headers"
-            :items="reports"
-            class="elevation-1"
-            style="max-height: 300px; overflow-y: auto"
-            v-if="!isMobile"
-          >
-            <template v-slot:item="props">
-              <tr>
-                <td nowrap="true">{{ props.item.title }}</td>
-                <td nowrap="true">{{ props.item.actor_name }}</td>
-                <td nowrap="true">{{ props.item.company_name }}</td>
-                <td nowrap="true">{{ formatDate(props.item.updated_date) }}</td>
-                <td><v-icon @click="updateReport(props.item)">mdi-pencil</v-icon></td>
-                <td><v-icon color="red lighten-1" @click="deleteReport(props.item)">mdi-delete</v-icon></td>
-              </tr>
-            </template>
-          </v-data-table>
+            <!-- Desktop data table V2 EXPERIMENTAL -->
+            <v-data-table
+                :headers="headers"
+                :items="reports"
+                v-if="!isMobile"
+                :single-expand="true"
+                item-key="title"
+                show-expand
+                class="elevation-2"
+            >
+
+
+
+              <template v-slot:item.updated_date="{ item }">
+                <td>{{ formatDate(item.updated_date) }}</td>
+              </template>
+
+              <template v-slot:item.update="{ item }">
+                <td><v-icon @click="updateReport(item)">mdi-pencil</v-icon></td>
+              </template>
+
+              <template v-slot:item.delete="{ item }">
+                <td><v-icon color="red lighten-1" @click="deleteReport(item)">mdi-delete</v-icon></td>
+              </template>
+
+              <template v-slot:expanded-item="{ headers, item }">
+                <td :colspan="headers.length">
+                  <v-container>
+                    "{{ item.content }}"
+                  </v-container>
+                </td>
+              </template>
+            </v-data-table>
 
           <!-- Mobile data iterator -->
           <v-data-iterator
             :items="reports"
             hide-default-footer
+            :single-expand="true"
             v-else
           >
             <template v-slot:default="{ items, isExpanded, expand }">
@@ -81,7 +94,7 @@
                   cols="12"
                 >
                   <v-card @click.native="expand(item, !isExpanded(item))">
-                    <v-card-title class="pb-0 pt-0 pl-0">
+                    <v-card-title class="pa-0">
                       <v-col cols="8" class="text-left body-2 text-truncate">{{item.title}}</v-col>
                       <v-col cols="4">
                         <v-card-actions>
@@ -104,7 +117,7 @@
                       <v-list-item>
                         <v-list-item-content>
                           <v-list-item-title class="font-weight-bold">Content</v-list-item-title>
-                          <v-list-item-subtitle>{{ item.content }}</v-list-item-subtitle>
+                          <v-list-item-subtitle class="wrap-text">{{ item.content }}</v-list-item-subtitle>
                         </v-list-item-content>
                       </v-list-item>
                       <v-list-item>
@@ -142,19 +155,20 @@ const apiService = new APIService();
 export default {
   name: "ReportList",
   data: () => ({
+    expanded: {},
     reports: [],
     validUserName: "Guest",
     reportSize: 0,
     showMsg: '',
     isMobile: false,
     headers: [
-      {text: 'Title', sortable: false, align: 'left',},
-      {text: 'Actor', sortable: false, align: 'left',},
-      {text: 'Company', sortable: false, align: 'left',},
-      {text: 'Last Updated', sortable: false, align: 'left',},
-      {text: 'Update', sortable: false, align: 'left',},
-      {text: 'Delete', sortable: false, align: 'left',}
-
+      {text: 'Title', value: 'title', sortable: false, align: 'left',},
+      {text: 'Actor', value: 'actor_name', sortable: false, align: 'left',},
+      {text: 'Organization', value: 'company_name', sortable: false, align: 'left',},
+      {text: 'Last Updated', value: 'updated_date', sortable: true, align: 'left',},
+      {text: 'Update', value: 'update', sortable: false, align: 'left',},
+      {text: 'Delete', value: 'delete', sortable: false, align: 'left',},
+      {text: '', value: 'data-table-expand', align: 'center'},
     ],
   }),
   mounted() {
@@ -163,10 +177,7 @@ export default {
   },
   methods: {
     onResize() {
-      if (window.innerWidth < 600)
-        this.isMobile = true;
-      else
-        this.isMobile = false;
+      this.isMobile = window.innerWidth < 600;
     },
     showMessages(){
       console.log(this.$route.params.msg)
@@ -228,4 +239,8 @@ export default {
 </script>
 
 <style scoped>
+.wrap-text {
+  white-space: normal;
+}
+
 </style>

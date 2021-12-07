@@ -11,7 +11,7 @@ import ReportEdit from "@/components/ReportEdit";
 import CompanyReports from "@/components/CompanyReports";
 import Register from "@/components/Register";
 import ActorCreate from "../components/ActorCreate";
-import CompanyCreate from "../components/CompanyCreate";
+import OrgCreate from "../components/OrgCreate";
 import ActorEdit from "../components/ActorEdit";
 import CompanyEdit from "../components/CompanyEdit";
 
@@ -63,9 +63,9 @@ export default new Router({
       component: ActorEdit
     },
     {
-      path: '/company-create',
-      name: 'CompanyCreate',
-      component: CompanyCreate
+      path: '/org-create',
+      name: 'OrgCreate',
+      component: OrgCreate
     },
     {
       path: '/company-edit/:pk',

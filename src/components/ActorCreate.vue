@@ -28,6 +28,7 @@
                       v-model="actor.fName"
                       label="First Name"
                       required
+                      color="#401a19"
                       id="fName_id"
                     />
 
@@ -35,6 +36,7 @@
                       v-model="actor.lName"
                       label="Last Name"
                       required
+                      color="#401a19"
                       id="lName_id"
                     />
 
@@ -42,12 +44,34 @@
                       v-model="actor.job_position"
                       label="Job Position"
                       required
+                      color="#401a19"
                       id="jobPosition_id"
                     />
+
+                    <v-row>
+                      <v-col cols="6">
+                        <v-btn
+                          v-if="!isUpdate"
+                          class="white--text"
+                          block
+                          color="#401a19"
+                          @click="createActor">Save</v-btn>
+                        <v-btn
+                          v-if="isUpdate"
+                          class="white--text"
+                          block
+                          color="#401a19"
+                          @click="updateActor">Update</v-btn>
+                      </v-col>
+                      <v-col cols="6">
+                        <v-btn
+                          @click="cancelOperation"
+                          block
+                          outlined
+                          color="#401a19">Cancel</v-btn>
+                      </v-col>
+                    </v-row>
                   </v-container>
-                  <v-btn v-if="!isUpdate" class="blue white--text" @click="createActor">Save</v-btn>
-                  <v-btn v-if="isUpdate" class="blue white--text" @click="updateActor">Update</v-btn>
-                  <v-btn class="white black--text" @click="cancelOperation">Cancel</v-btn>
                 </v-form>
               </v-card-text>
             </v-card>
