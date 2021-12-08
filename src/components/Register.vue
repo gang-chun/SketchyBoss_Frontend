@@ -17,7 +17,7 @@
                     id="username_ID"
                   />
                   <v-text-field
-                    v-model="userData.account_emailaddress"
+                    v-model="userData.email"
                     label="Email"
                     color="#401a19"
                     required
@@ -94,19 +94,18 @@ export default {
     },
     createUser() {
        apiService.registerUser(this.userData).then(response => {
-         if (response.status === 204) {
+         if (response.status === 201) {
+           this.$alert('Account created successfully! You will now be taken to the previous page to log in with your new credentials.')
            console.log(response)
+           router.push('/auth')
          }
        })
-      .then(response => {
-        this.$alert('Account created successfully! You will now' +
-          ' be taken to the previous page to log in with your new credentials.')
-        router.push('/auth')
-      })
       .catch(response => {
-        console.log(response.status)
-        this.$alert('There was a problem with your registration. Please check all fields ' +
-          'and try again.')
+        if (response.status === 400) {
+          console.log(response.status)
+          this.$alert('There was a problem with your registration. Please check all fields ' +
+            'and try again.')
+        }
       })
     }
   },

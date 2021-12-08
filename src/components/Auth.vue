@@ -24,7 +24,7 @@
                   v-model="credentials.username"
                   :counter="70"
                   color="#401a19"
-                  :disabled="loading"
+
                   label="Username"
                   :rules="rules.username"
                   maxlength="70"
@@ -36,7 +36,7 @@
                   v-model="credentials.password"
                   color="#401a19"
                   :counter="20"
-                  :disabled="loading"
+
                   label="Password"
                   :rules="rules.password"
                   maxlength="20"
@@ -52,7 +52,7 @@
                       color="#401a19"
                       block
                       :disabled="!valid"
-                      :loading="loading"
+
                       @click="login()"
                       class="btn white--text">Login</v-btn>
                   </v-col>
@@ -76,17 +76,6 @@
             </v-form>
           </v-card-text>
         </v-card>
-
-
-        <v-card v-show="passwordResetContain === true" style="margin-top: 20px; padding: 5px;" class="elevation-6">
-          <v-card-subtitle>Enter your email to send a reset link for your password</v-card-subtitle>
-            <v-container>
-                <v-text-field v-model="emailReset" label="email" maxlength="70"/>
-                <v-btn small @click="sendReset()" class="btn">Send Reset</v-btn>
-            </v-container>
-          <v-card-text v-show="resetSent" style="color: red;">Check your email for the reset link.</v-card-text>
-
-        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -102,7 +91,6 @@
     data: () => ({
 
       credentials: {},
-      passwordResetContain: false,
       emailReset: '',
       resetSent: false,
       valid: true,
@@ -112,7 +100,7 @@
         username: [
           v => !!v || "Username is required",
           v => (v && v.length > 3) || "A username must be more than 3 characters long",
-          v => /^[a-z0-9_]+$/.test(v) || "A username can only contain letters and digits"
+          v => /^[a-zA-Z0-9_]+$/.test(v) || "A username can only contain letters and digits"
         ],
         password: [
           v => !!v || "Password is required",
@@ -132,13 +120,12 @@
         // checking if the input is valid
         if (this.$refs.form.validate()) {
           this.loading = true;
-            apiService.authenticateLogin(this.credentials).then((res)=>{
+            apiService.authenticateLogin(this.credentials).then((res) => {
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('isAuthenticates', JSON.stringify(true));
             localStorage.setItem('log_user', JSON.stringify(this.credentials.username));
-            router.push("/");
-            //router.go(-1);
-             window.location = "/"
+            window.location = "/";
+
           }).catch(e => {
             this.loading = false;
             localStorage.removeItem('isAuthenticates');
